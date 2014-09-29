@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -12,8 +14,11 @@ public class AssistentTeacher extends RoleSchool implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public AssistentTeacher() {
+    @OneToMany
+    private Collection<Course> courses;
 
+    public AssistentTeacher() {
+        super.setRoleName("Assistent Teacher");
     }
 
     @Override

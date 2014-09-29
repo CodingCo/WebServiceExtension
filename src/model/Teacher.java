@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -14,12 +16,27 @@ public class Teacher extends RoleSchool implements Serializable {
 
     private String degree;
 
+    @OneToMany
+    private Collection<Course> courses;
+
     public Teacher() {
+        super.setRoleName("Teacher");
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
     }
 
     @Override
     public String toString() {
         return "Teacher{" + "degree=" + degree + '}';
     }
+    
+    
+    // adders removers
 
 }

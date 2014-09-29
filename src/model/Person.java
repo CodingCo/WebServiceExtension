@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -21,7 +22,7 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personIdGen")
     @SequenceGenerator(name = "personIdGen", sequenceName = "PERSON_SEQ", initialValue = 100000, allocationSize = 1)
     private Long id;
 
@@ -38,10 +39,6 @@ public class Person implements Serializable {
     @OneToMany
     private Collection<RoleSchool> roles;
 
-    public Long getId() {
-        return id;
-    }
-
     public Person(Long id, String firstName, String lastName, String phone, String mail, RoleSchool role) {
         this.id = id;
         this.firstName = firstName;
@@ -52,6 +49,10 @@ public class Person implements Serializable {
     }
 
     public Person() {
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public final void addRole(RoleSchool role) {
