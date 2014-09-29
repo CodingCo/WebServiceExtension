@@ -1,0 +1,1 @@
+java -cp dist/ServerSide.jar chatserver.ServerExecutor

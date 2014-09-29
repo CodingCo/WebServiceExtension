@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Gang of five</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="indexstyle.css"/>
+
+</head>
+<body>
+<div class="nav-wrap">
+    <div class="container">
+        <ul class="nav nav-pills pull-left">
+            <li class="active"><a href="#">Frontpage</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="wireshark.html">wireshark</a></li>
+            <li><a href="/log">Admin</a></li>
+        </ul>
+        <ul class="nav nav-pills pull-right">
+            <li><a href="https://github.com/CodingCo/Client">View on Github</a></li>
+            <li><a href="ChatBraveheart.zip">Download G5Chat</a></li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+<div class="container">
+    <div class="jumbotron">
+        <h1> G5Chat</h1>
+        <img src="images/chat.png" alt=""/>
+
+        <p>Fully featured, nimble designed, seamlessly connected chatclient and server... made just for you</p>
+
+    </div>
+
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            Server commands
+        </div>
+        <div class="panel-body">
+            <p>the commands available to control brav3h3art chatserver and webpage</p>
+        </div>
+        <!-- List group -->
+        <ul class="list-group">
+            <li class="list-group-item">
+                <code>start server</code> starts the chatserver
+            </li>
+            <li class="list-group-item">
+                <code>stop server</code> stops the chatserver
+            </li>
+            <li class="list-group-item">
+                <code>start web</code> starts the webserver
+            </li>
+            <li class="list-group-item">
+                <code>stop web</code> stops the webserver
+            </li>
+            <li class="list-group-item">
+                <code>killall</code> stops the webserver and chatserver
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Server and Client design</h3>
+        </div>
+        <div class="panel-body">
+            <h4>Client</h4>
+
+            <p>
+                In the client application, every class has its own interface. An observer pattern has been
+                implemented
+                in
+                the
+                GUI class and clientSide class, which calls for an interface solution. This makes it possible, not
+                having
+                the
+                Swing interface “blocked”, while waiting for a response(in this case a message) from the server.
+
+                Originally, the program only had one interface: ”ViewListener”, which was implemented in the GUI. We
+                then
+                added
+                the SocketClass, which contains the thread that listens for inputs from the server. We thought the
+                best
+                way
+                to
+                tell ClientSide that a new message had arrived, was to contain it as an observer of SocketClass.
+                That
+                way,
+                we
+                can do it, without SocketClass knowing anything about ClientSide class.
+
+                The SocketClass also implements an interface: “SocketIF”. This way, it’s easier to use another
+                connector
+                class
+                in the program, thous it implements the SocketIF interface. This also makes it easier to set op a
+                mock.
+            </p>
+
+            <div class="well"> The awesome client</div>
+        </div>
+
+
+        <div class="panel-body">
+            <h4>Server</h4>
+
+            <p>
+                The ServerSide project gets started from the class ServerExecutor. This class starts both the
+                ChatServer
+                and
+                the
+                WebServer.
+
+                Overall we’ve tried to create a layer of abstraction by making interfaces. This also makes it easier
+                for
+                us
+                to
+                test(making mockups). We’ve tried to aim for high testability in all our classes, hence it has a lot
+                of
+                responsibilities.
+
+                The server logs to a file, using a FileHandler. This way, we can log everything that happens on the
+                server.
+            </p>
+
+            <div class="well"> The awesome server</div>
+        </div>
+    </div>
+
+
+</div>
+<div class="container">
+    <footer>
+        <p>this website is made by G5 - viewed best in desktop browser</p>
+    </footer>
+</div>
+</body>
+
+</html>
