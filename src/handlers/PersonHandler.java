@@ -85,25 +85,6 @@ public class PersonHandler implements HttpHandler {
                 break;
 
             case "PUT":
-                try {
-                    InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
-                    BufferedReader br = new BufferedReader(isr);
-                    String jsonInput = br.readLine();
-
-                    String path = he.getRequestURI().getPath();
-                    int lastIndex = path.lastIndexOf("/");
-                    if (lastIndex > 0) {
-                        int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        RoleSchool r = facade.addRoleSchool(jsonInput, id);
-                        response = new Gson().toJson(r);
-                    } else {
-                        status = 400;
-                        response = "no id";
-                    }
-                } catch (NumberFormatException nfe) {
-                    response = "id is not a number";
-                    status = 404;
-                }
                 break;
         }
         
