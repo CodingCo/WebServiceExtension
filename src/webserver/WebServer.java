@@ -4,6 +4,7 @@ import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import handlers.ServerFileHandler;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,14 +36,13 @@ public class WebServer {
         this.handler = handler;
     }
 
-    
     // TO BE EDITED
     public void startServer() {
         ip = property.getProperty("ipaddress", "100.85.90.7");
         port = Integer.parseInt(property.getProperty("webport", "8028"));
         try {
             server = HttpServer.create(new InetSocketAddress(ip, port), 0);
-            server.createContext("/", new PageHandler());
+            server.createContext("/", new ServerFileHandler());
             server.createContext("/log", new LogHandler());
             server.setExecutor(null);
             server.start();
@@ -57,40 +57,40 @@ public class WebServer {
         System.out.println("webserver closed");
     }
 
-    class PageHandler implements HttpHandler {
-
-        String contentType = "";
-        String contentFolder = "public/";
-
-        @Override
-
-        public void handle(HttpExchange he) throws IOException {
-            String fileName = he.getRequestURI().getPath().substring(1);
-            File file;
-
-            if (fileName.isEmpty() || fileName.equals("/")) {
-                file = new File(contentFolder + "index.html");
-            } else {
-                contentType = getContentType(fileName);
-                file = new File(contentFolder + fileName);
-            }
-
-            byte[] bytesToSend = new byte[(int) file.length()];
-            try {
-                BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
-                bis.read(bytesToSend, 0, bytesToSend.length);
-            } catch (IOException ie) {
-                Logger.getLogger(WebServer.class.getName()).log(Level.SEVERE, null, ie);
-            }
-            Headers h = he.getResponseHeaders();
-            h.add("Content-Type", contentType);
-            he.sendResponseHeaders(200, bytesToSend.length);
-
-            try (OutputStream os = he.getResponseBody()) {
-                os.write(bytesToSend, 0, bytesToSend.length);
-            }
-        }
-    }
+//    class PageHandler implements HttpHandler {
+//
+//        String contentType = "";
+//        String contentFolder = "public/";
+//
+//        @Override
+//
+//        public void handle(HttpExchange he) throws IOException {
+//            String fileName = he.getRequestURI().getPath().substring(1);
+//            File file;
+//
+//            if (fileName.isEmpty() || fileName.equals("/")) {
+//                file = new File(contentFolder + "index.html");
+//            } else {
+//                contentType = getContentType(fileName);
+//                file = new File(contentFolder + fileName);
+//            }
+//
+//            byte[] bytesToSend = new byte[(int) file.length()];
+//            try {
+//                BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+//                bis.read(bytesToSend, 0, bytesToSend.length);
+//            } catch (IOException ie) {
+//                Logger.getLogger(WebServer.class.getName()).log(Level.SEVERE, null, ie);
+//            }
+//            Headers h = he.getResponseHeaders();
+//            h.add("Content-Type", contentType);
+//            he.sendResponseHeaders(200, bytesToSend.length);
+//
+//            try (OutputStream os = he.getResponseBody()) {
+//                os.write(bytesToSend, 0, bytesToSend.length);
+//            }
+//        }
+//    }
 
     class LogHandler implements HttpHandler {
 
@@ -130,7 +130,7 @@ public class WebServer {
             }
 
             String onlineUsers = handler.getUsers();
-            
+
             if (onlineUsers.equals("")) {
                 hbr.append("<li class=\"list-group-item list-group-item-danger \">");
                 hbr.append("no users online");
@@ -160,25 +160,5 @@ public class WebServer {
         }
     }
 
-    private static String getContentType(String s) {
-
-        String contentType = s.substring(s.lastIndexOf(".") + 1);
-        switch (contentType) {
-            case "html":
-                return "text/html";
-            case "css":
-                return "text/css";
-            case "pdf":
-                return "application/pdf";
-            case "jar":
-                return "applikation/zip";
-            case "png":
-            case "jpeg":
-            case "jpg":
-            case "gif":
-                return "image/" + contentType;
-        }
-        return contentType;
-    }
-
+   
 }
