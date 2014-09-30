@@ -11,11 +11,7 @@ import java.io.OutputStream;
 public class ServerResponse {
 
     public String FILE_NOT_FOUND = "404 not found";
-    
-    
-    
-    
-    
+
     public void error(HttpExchange he, int statusCode, String message) throws IOException {
         send(he, statusCode, message.getBytes());
     }
@@ -27,4 +23,7 @@ public class ServerResponse {
         }
     }
 
+    public void sendMessage(HttpExchange he, int statusCode, String message) throws IOException {
+        send(he, statusCode, message.getBytes());
+    }
 }
