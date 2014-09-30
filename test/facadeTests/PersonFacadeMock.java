@@ -19,9 +19,9 @@ public class PersonFacadeMock implements FacadeInterface {
     private List<Person> persons;
     private Gson trans;
 
-    public PersonFacadeMock() {
+    public PersonFacadeMock(Gson trans) {
         this.persons = new ArrayList<>();
-        this.trans = new Gson();
+        this.trans = trans;
     }
 
     @Override
