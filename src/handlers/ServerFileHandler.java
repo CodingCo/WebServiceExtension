@@ -13,9 +13,9 @@ import java.io.IOException;
  */
 public class ServerFileHandler implements HttpHandler {
 
-    String contentType = "";
-    String contentFolder = "public/";
-    ServerResponse response = new ServerResponse();
+    private String contentType = "";
+    private final String contentFolder = "public/";
+    private final ServerResponse response = new ServerResponse();
 
     @Override
     public void handle(HttpExchange he) throws IOException {

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import webserver.WebServer;
 
 /**
@@ -18,13 +20,17 @@ public class ServerExecutor {
     static WebServer webServer;
 
     public static void main(String[] args) {
-        ArrayBlockingQueue messageQue = new ArrayBlockingQueue(100);
-        MessageHandler msgHandler = new MessageHandler(messageQue, new HashMap());
-        webServer = new WebServer(msgHandler);
-        webServer.startServer();
-        server = new ChatServer(msgHandler);
-        server.startServer();
-        serverCommands();
+        try {
+            ArrayBlockingQueue messageQue = new ArrayBlockingQueue(100);
+            MessageHandler msgHandler = new MessageHandler(messageQue, new HashMap());
+            webServer = new WebServer(msgHandler);
+            webServer.startServer();
+            server = new ChatServer(msgHandler);
+            server.startServer();
+            serverCommands();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerExecutor.class.getName()).log(Level.SEVERE, ex.toString());
+        }
     }
 
     public static void serverCommands() {
@@ -42,7 +48,7 @@ public class ServerExecutor {
         System.out.println("server shutdown");
     }
 
-    private static void switchCommands(String command) {
+    private static void switchCommands(String command) throws IOException {
 
         switch (command) {
             case "stop server":
