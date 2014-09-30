@@ -53,6 +53,10 @@ public class Person implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public final void addRole(RoleSchool role) {
         if (roles == null) {
             roles = new ArrayList();
@@ -64,6 +68,15 @@ public class Person implements Serializable {
         if (roles.contains(role)) {
             roles.remove(role);
         }
+    }
+
+    public RoleSchool getRole(int roleId) {
+        for (RoleSchool role : roles) {
+            if (role.getId() == roleId) {
+                return role;
+            }
+        }
+        return null;
     }
 
     public String getFirstName() {
@@ -100,7 +113,9 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Person[ id=" + id + " ]";
+        return "Person{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", roles=" + roles + ", mail=" + mail + ", phone=" + phone + '}';
     }
+
+    
 
 }
