@@ -35,6 +35,10 @@ public abstract class RoleSchool implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getRoleName() {
         return roleName;
     }
@@ -45,7 +49,9 @@ public abstract class RoleSchool implements Serializable {
 
     @Override
     public String toString() {
-        return "model.RoleSchool[ id=" + id + " ]";
+        return "RoleSchool{" + "id=" + id + ", roleName=" + roleName + '}';
     }
+
+    
 
 }
