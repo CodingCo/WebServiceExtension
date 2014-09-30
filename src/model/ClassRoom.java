@@ -2,9 +2,9 @@ package model;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 /**
@@ -18,7 +18,7 @@ public class ClassRoom implements Serializable {
     private String roomNumber;
 
     @OneToMany(mappedBy = "classRoom")
-    @Column(name = "TIME_BLOCK")
+    @JoinColumn(name = "TIME_BLOCK")
     private Collection<TimeBlock> timeBlocks;
 
     private int noOfSeats;
@@ -26,9 +26,8 @@ public class ClassRoom implements Serializable {
     public ClassRoom() {
     }
 
-    public ClassRoom(String roomNumber, Collection<TimeBlock> timeBlocks, int noOfSeats) {
+    public ClassRoom(String roomNumber, int noOfSeats) {
         this.roomNumber = roomNumber;
-        this.timeBlocks = timeBlocks;
         this.noOfSeats = noOfSeats;
     }
 
@@ -52,7 +51,6 @@ public class ClassRoom implements Serializable {
     public String toString() {
         return "ClassRoom{" + "roomNumber=" + roomNumber + ", timeBlocks=" + timeBlocks + ", noOfSeats=" + noOfSeats + '}';
     }
-    
-    
+
     // adders removers
 }

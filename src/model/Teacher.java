@@ -23,6 +23,11 @@ public class Teacher extends RoleSchool implements Serializable {
         super.setRoleName("Teacher");
     }
 
+    public Teacher(String degree) {
+        super.setRoleName("Teacher");
+        this.degree = degree;
+    }
+
     public String getDegree() {
         return degree;
     }
@@ -35,8 +40,6 @@ public class Teacher extends RoleSchool implements Serializable {
     public String toString() {
         return "Teacher{" + "degree=" + degree + '}';
     }
-    
-    
-    // adders removers
 
+    // adders removers
 }

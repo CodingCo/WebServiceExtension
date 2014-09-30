@@ -27,8 +27,8 @@ public class Person implements Serializable {
     private Long id;
 
     @Column(name = "FIRST_NAME")
-
     private String firstName;
+    
     @Column(name = "LAST_NAME")
     private String lastName;
 
@@ -39,8 +39,7 @@ public class Person implements Serializable {
     @OneToMany
     private Collection<RoleSchool> roles;
 
-    public Person(Long id, String firstName, String lastName, String phone, String mail, RoleSchool role) {
-        this.id = id;
+    public Person(String firstName, String lastName, String phone, String mail, RoleSchool role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
