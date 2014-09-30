@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -28,16 +27,16 @@ public class Person implements Serializable {
 
     @Column(name = "FIRST_NAME")
     private String firstName;
-    
+
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    private String phone;
+    @OneToMany
+    private Collection<RoleSchool> roles;
 
     private String mail;
 
-    @OneToMany
-    private Collection<RoleSchool> roles;
+    private String phone;
 
     public Person(String firstName, String lastName, String phone, String mail, RoleSchool role) {
         this.firstName = firstName;

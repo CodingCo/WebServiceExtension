@@ -35,6 +35,8 @@ public class WebServer {
         this.handler = handler;
     }
 
+    
+    // TO BE EDITED
     public void startServer() {
         ip = property.getProperty("ipaddress", "100.85.90.7");
         port = Integer.parseInt(property.getProperty("webport", "8028"));
