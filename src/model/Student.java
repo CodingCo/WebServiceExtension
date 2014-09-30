@@ -1,5 +1,6 @@
 package model;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Entity;
@@ -14,11 +15,12 @@ public class Student extends RoleSchool implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Expose
     private String semester;
 
     @OneToMany
     private Collection<Course> courses;
-
+    
     public Student() {
         super.setRoleName("student");
     }

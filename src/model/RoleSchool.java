@@ -1,5 +1,6 @@
 package model;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,7 @@ public abstract class RoleSchool implements Serializable {
     @SequenceGenerator(name = "roleIdGen", sequenceName = "ROLE_GEN", initialValue = 100000, allocationSize = 1)
     private Long id;
 
+    @Expose
     @Column(name = "ROLE_NAME")
     private String roleName;
 

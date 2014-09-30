@@ -56,7 +56,7 @@ public class PersonFacadeMock implements FacadeInterface {
         if (json.contains("Student")) {
             role = trans.fromJson(json, Student.class);
         }
-        if (json.contains("AssistentTeacher")){
+        if (json.contains("AssistentTeacher")) {
             role = trans.fromJson(json, AssistentTeacher.class);
         }
         for (Person person : persons) {
@@ -69,8 +69,8 @@ public class PersonFacadeMock implements FacadeInterface {
 
     @Override
     public Person delete(long id) {
-        for(int i = 0; i < persons.size(); i++){
-            if(persons.get(i).getId() == id){
+        for (int i = 0; i < persons.size(); i++) {
+            if (persons.get(i).getId() == id) {
                 return persons.remove(i);
             }
         }
