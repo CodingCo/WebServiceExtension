@@ -25,6 +25,10 @@ import webinterfaces.FacadeInterface;
  */
 public class PersonFacadeTest {
 
+    FacadeInterface instance;
+    GsonBuilder gsonBuilder;
+    Gson trans;
+
     public PersonFacadeTest() {
     }
 
@@ -38,6 +42,13 @@ public class PersonFacadeTest {
 
     @Before
     public void setUp() {
+        gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
+        trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
+
+        // Only one should be visible when running test
+//        instance = new PersonFacadeDB(trans);
+        instance = new PersonFacadeMock(trans);
     }
 
     @After
@@ -49,25 +60,20 @@ public class PersonFacadeTest {
      */
     @Test
     public void testGetPersonsAsJSON() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
-        Gson trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
-
         System.out.println("getPersonsAsJSON");
-        PersonFacadeMock pf = new PersonFacadeMock(trans);
 
         Student role = new Student("Third");
         Person p1 = new Person("John", "McLaren", "myMail@hotmail.com", "57895879", role);
         Person p2 = new Person("Dane", "McLaren", "myMail@hotmail.com", "57895879", role);
         Person p3 = new Person("OhoMan", "McLaren", "myMail@hotmail.com", "57895879", role);
 
-        pf.addPersonFromGson(trans.toJson(p1));
-        pf.addPersonFromGson(trans.toJson(p2));
-        pf.addPersonFromGson(trans.toJson(p3));
+        instance.addPersonFromGson(trans.toJson(p1));
+        instance.addPersonFromGson(trans.toJson(p2));
+        instance.addPersonFromGson(trans.toJson(p3));
 
-        String expPerson = pf.getOnePersonAsJson(100001);
+        String expPerson = instance.getOnePersonAsJson(100001);
 
-        String responseFromServer = pf.getPersonsAsJSON();
+        String responseFromServer = instance.getPersonsAsJSON();
 
         if (responseFromServer.contains(expPerson)) {
             assertTrue(true);
@@ -82,20 +88,14 @@ public class PersonFacadeTest {
      */
     @Test
     public void testGetOnePersonAsJson() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
-        Gson trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
         System.out.println("getPersonsAsJSON");
-        PersonFacadeMock pf = new PersonFacadeMock(trans);
         Person p1 = new Person("John", "McLaren", "myMail@hotmail.com", "57895879", new Student("Third"));
         p1.setId(100001l);
         String p1AsJson = trans.toJson(p1, Person.class);
-        Person fetchedPerson = pf.addPersonFromGson(p1AsJson);
+        Person fetchedPerson = instance.addPersonFromGson(p1AsJson);
 
         long p1ID = fetchedPerson.getId();
-        String p1Response = pf.getOnePersonAsJson(p1ID);
-        System.err.println("P1 ASJSON: " + p1AsJson);
-        System.err.println("P1 RESPONSE: " + p1Response);
+        String p1Response = instance.getOnePersonAsJson(p1ID);
         assertEquals(p1AsJson, p1Response);
     }
 
@@ -104,15 +104,11 @@ public class PersonFacadeTest {
      */
     @Test
     public void testAddPersonFromGson() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
-        Gson trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
-        FacadeInterface pf = new PersonFacadeMock(trans);
-
+        System.out.println("addPersonFromGson");
         Person person = new Person("Inger", "Hammerik", "myMail@hotmail.com", "56789589", new Student("Third"));
-        pf.addPersonFromGson(trans.toJson(person));
+        instance.addPersonFromGson(trans.toJson(person));
         long id = 100001;
-        Person expResult = trans.fromJson(pf.getOnePersonAsJson(id), Person.class);
+        Person expResult = trans.fromJson(instance.getOnePersonAsJson(id), Person.class);
         assertEquals(id, (long) expResult.getId());
     }
 
@@ -121,8 +117,6 @@ public class PersonFacadeTest {
      */
     @Test
     public void testAddRoleSchool() {
-        Gson trans = new Gson();
-        PersonFacadeMock instance = new PersonFacadeMock(trans);
         System.out.println("addRoleSchool");
         long id = 100000L;                                                           //== Expecting we are testing on an empty table/database
         String degree = "D2";
@@ -139,14 +133,10 @@ public class PersonFacadeTest {
      */
     @Test
     public void testDelete() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
-        Gson trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
-        PersonFacadeMock instance = new PersonFacadeMock(trans);
         System.out.println("delete");
         long id = 100001L;                                                           //== Expecting we are testing on an empty table/database
         Person personToDelete = new Person("Alu", "Albert", "aluminium@metal.com", "12345678", new Student("Third"));
-        
+
         Person expResult = instance.addPersonFromGson(trans.toJson(personToDelete));
         Person result = instance.delete(id);
         assertEquals(expResult.toString(), result.toString());
