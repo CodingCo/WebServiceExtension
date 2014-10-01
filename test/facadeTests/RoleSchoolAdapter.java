@@ -9,7 +9,7 @@ public class RoleSchoolAdapter implements JsonSerializer<RoleSchool>, JsonDeseri
     @Override
     public JsonElement serialize(RoleSchool t, Type type, JsonSerializationContext jsc) {
         final JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("roleName", t.getRoleName());
+        
         if(t instanceof Student){
             Student student = (Student) t;
            jsonObject.addProperty("semester", student.getSemester());
@@ -21,6 +21,7 @@ public class RoleSchoolAdapter implements JsonSerializer<RoleSchool>, JsonDeseri
         if(t instanceof AssistentTeacher){
             AssistentTeacher at = (AssistentTeacher) t;
         }
+        jsonObject.addProperty("roleName", t.getRoleName());
         return jsonObject;
     }
 

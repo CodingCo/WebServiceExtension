@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
 import javax.persistence.*; // Temp import!
+import model.AssistentTeacher;
+import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -37,17 +40,44 @@ public class PersonFacadeDB implements FacadeInterface {
     
     @Override
     public Person addPersonFromGson(String json) {
-        return null;
+        Person personFromJson = trans.fromJson(json, Person.class);
+        em.getTransaction().begin();
+        em.persist(personFromJson);
+        em.getTransaction().commit();
+        return personFromJson;
     }
     
     @Override
     public RoleSchool addRoleSchool(String json, long id) {
-        return null;
+        RoleSchool role = null;
+        if (json.contains("Teacher")) {
+            role = trans.fromJson(json, Teacher.class);
+        }
+        if (json.contains("Student")) {
+            role = trans.fromJson(json, Student.class);
+        }
+        if (json.contains("AssistentTeacher")) {
+            role = trans.fromJson(json, AssistentTeacher.class);
+        }
+        
+        em.getTransaction().begin();
+        Person person = em.find(Person.class,id);
+        if(person != null && role != null){
+            person.addRole(role);
+            //== Maybe use persist, or merge
+        }
+        em.getTransaction().commit();
+        
+        return role;
     }
     
     @Override
     public Person delete(long id) {
-        return null;
+        em.getTransaction().begin();
+        Person person = em.find(Person.class, id);
+        em.remove(person);
+        em.getTransaction().commit();
+        return person;
     }
     
     private EntityManager createEntityManager() {

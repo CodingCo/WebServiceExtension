@@ -18,7 +18,7 @@ public class AssistentTeacher extends RoleSchool implements Serializable {
     private Collection<Course> courses;
 
     public AssistentTeacher() {
-        super.setRoleName("Assistent Teacher");
+        super.setRoleName("AssistentTeacher");
     }
 
     @Override
