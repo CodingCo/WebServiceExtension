@@ -81,7 +81,7 @@ public class PersonFacadeDB implements FacadeInterface {
     }
     
     private EntityManager createEntityManager() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("noPercistenceYet");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("noPercistenceYet"); // <-- Remember this
         EntityManager emToReturn = emf.createEntityManager();
         return emToReturn;
     }
