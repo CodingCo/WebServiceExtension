@@ -33,6 +33,7 @@ public class WebServer {
         server.createContext("/log", new AdminHandler(handler));
         server.setExecutor(null);
         server.start();
+        System.out.println("Server started, listening on port: " + port);
     }
 
     public void closeHttpServer() {
