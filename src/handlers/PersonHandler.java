@@ -6,9 +6,10 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import model.AssistentTeacher;
 import model.Person;
-import model.RoleSchool;
 import webinterfaces.FacadeInterface;
 
 /**
@@ -17,22 +18,29 @@ import webinterfaces.FacadeInterface;
  */
 public class PersonHandler implements HttpHandler {
 
+    List<Person> list = new ArrayList();
     FacadeInterface facade;
     ServerResponse sr;
 
     public PersonHandler() {
 
         sr = new ServerResponse();
-        //facade = new Facade();   
+        //facade = new Facade(); 
+
     }
 
     @Override
     public void handle(HttpExchange he) throws IOException {
 
+        list.add(new Person("Kasper", "Hald", "234", "123", new AssistentTeacher()));
+        list.add(new Person("Kasper", "Hald", "234", "123", new AssistentTeacher()));
+        list.add(new Person("Kasper", "Hald", "234", "123", new AssistentTeacher()));
+
         String method = he.getRequestMethod().toUpperCase();
         String response = "";
         int status = 0;
 
+        System.out.println(method);
         switch (method) {
 
             case "GET":
@@ -42,8 +50,12 @@ public class PersonHandler implements HttpHandler {
                     if (lastIndex > 0) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
                         response = facade.getOnePersonAsJson(id);
+                        status = 200;
                     } else {
-                        response = facade.getPersonsAsJSON();
+                        //response = facade.getPersonsAsJSON();
+                        String json = new Gson().toJson(list);
+                        response = json;
+                        status = 200;
                     }
                 } catch (NumberFormatException nfe) {
                     response = "id is not a number";
@@ -52,6 +64,7 @@ public class PersonHandler implements HttpHandler {
                 break;
 
             case "POST":
+                System.out.println("POST");
                 try {
                     InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
                     BufferedReader br = new BufferedReader(isr);
@@ -66,7 +79,8 @@ public class PersonHandler implements HttpHandler {
                 }
                 break;
 
-            case "DELETE":
+            case "OPTIONS":
+                System.out.println("DELETE");
                 try {
                     String path = he.getRequestURI().getPath();
                     int lastIndex = path.lastIndexOf("/");
@@ -85,11 +99,13 @@ public class PersonHandler implements HttpHandler {
                 break;
 
             case "PUT":
+                System.out.println("PUT");
                 break;
         }
-        
+
+        System.out.println(response);
         he.getResponseHeaders().add("Content-Type", "application/json");
-        sr.sendMessage(he, status, response);  
+        sr.sendMessage(he, status, response);
 
     }
 

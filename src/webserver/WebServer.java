@@ -2,6 +2,7 @@ package webserver;
 
 import com.sun.net.httpserver.HttpServer;
 import handlers.AdminHandler;
+import handlers.PersonHandler;
 import handlers.ServerFileHandler;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -31,6 +32,7 @@ public class WebServer {
         server = HttpServer.create(new InetSocketAddress(ip, port), 0);
         server.createContext("/", new ServerFileHandler());
         server.createContext("/log", new AdminHandler(handler));
+        server.createContext("/person", new PersonHandler());
         server.setExecutor(null);
         server.start();
         System.out.println("Server started, listening on port: " + port);
