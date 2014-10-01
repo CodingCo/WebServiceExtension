@@ -1,5 +1,6 @@
 package model;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,19 +24,25 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personIdGen")
     @SequenceGenerator(name = "personIdGen", sequenceName = "PERSON_SEQ", initialValue = 100000, allocationSize = 1)
+    @Expose
     private Long id;
-
+    
+    @Expose
     @Column(name = "FIRST_NAME")
     private String firstName;
 
+    @Expose
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Expose
     @OneToMany
     private Collection<RoleSchool> roles;
 
+    @Expose
     private String mail;
 
+    @Expose
     private String phone;
 
     public Person(String firstName, String lastName, String phone, String mail, RoleSchool role) {

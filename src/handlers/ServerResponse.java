@@ -1,3 +1,4 @@
+ <<<<<<< HEAD
 package handlers;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -8,6 +9,8 @@ import java.io.OutputStream;
  *
  * @author simon
  */
+
+
 public class ServerResponse {
 
     public String FILE_NOT_FOUND = "404 not found";
@@ -21,6 +24,10 @@ public class ServerResponse {
         try (OutputStream responseBody = he.getResponseBody()) {
             responseBody.write(bytesToSend, 0, bytesToSend.length);
         }
+    }
+
+    public void sendMessage(HttpExchange he, int statusCode, String message) throws IOException {
+        send(he, statusCode, message.getBytes());
     }
 
 }

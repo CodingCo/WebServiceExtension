@@ -1,5 +1,6 @@
 package model;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ public class Teacher extends RoleSchool implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Expose
     private String degree;
 
     @OneToMany
