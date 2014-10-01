@@ -7,8 +7,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import model.Person;
+import model.RoleSchool;
 import webinterfaces.FacadeInterface;
-
 
 /**
  *
@@ -22,7 +22,7 @@ public class PersonHandler implements HttpHandler {
     public PersonHandler() {
 
         sr = new ServerResponse();
-        facade = new PersonFacadeDB(new Gson()); 
+        facade = new PersonFacadeDB(new Gson());
 
     }
 
@@ -46,7 +46,7 @@ public class PersonHandler implements HttpHandler {
                         response = facade.getOnePersonAsJson(id);
                         status = 200;
                     } else {
-                        response = facade.getPersonsAsJSON();                        
+                        response = facade.getPersonsAsJSON();
                         status = 200;
                     }
                 } catch (NumberFormatException nfe) {
@@ -96,6 +96,29 @@ public class PersonHandler implements HttpHandler {
 
             case "PUT":
                 System.out.println("PUT");
+                try {
+                    InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
+                    BufferedReader br = new BufferedReader(isr);
+                    String jsonInput = br.readLine();
+
+                    String path = he.getRequestURI().getPath();
+                    int lastIndex = path.lastIndexOf("/");
+                    
+                    if (lastIndex > 0) {
+                        int id = Integer.parseInt(path.substring(lastIndex + 1));
+                        System.out.println(jsonInput);
+                        RoleSchool r = facade.addRoleSchool(jsonInput, id);
+                        System.out.println(r);
+                        response = new Gson().toJson(r);
+                    } else {
+                        status = 400;
+                        response = "no id";
+                    }
+                } catch (NumberFormatException nfe) {
+                    response = "id is not a number";
+                    status = 404;
+                }
+
                 break;
         }
 

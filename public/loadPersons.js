@@ -2,7 +2,7 @@
 function createTable(data){
     var persons = data;
     var res = "<table border = 1>";
-    res += "<tr><th>ID</th><th>FirstName</th><th>LastName</th><th>Mail</th><th>Phone</th></tr>";
+    res += "<tr><th>Id</th><th>FirstName</th><th>LastName</th><th>Mail</th><th>Phone</th></tr>";
 
     if(persons instanceof Array){
         for(var i = 0; i < persons.length; i++){
@@ -71,4 +71,25 @@ function deletePerson(){
         url: "http://localhost:8028/person/"+ personId,
         type: "DELETE"
     }).done( showAllPersons());
+}
+
+function addRole(){
+
+    var roleName = $("#roleName").val();
+    var personId = $("#personToRole").val();
+    var data = "";
+
+    if (roleName.toLowerCase() === "student") {
+        data += "{semester: "+$("#semester").val() + ", roleName: "+$("#roleName").val()+"}";
+    }
+
+    $.ajax({
+        url: "http://localhost:8028/person/"+ personId,
+        type: "PUT",
+        dataType: "json",
+        data: data
+    }).done( showAllPersons());
+
+
+
 }
