@@ -6,11 +6,9 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import model.AssistentTeacher;
 import model.Person;
 import webinterfaces.FacadeInterface;
+
 
 /**
  *
@@ -18,23 +16,18 @@ import webinterfaces.FacadeInterface;
  */
 public class PersonHandler implements HttpHandler {
 
-    List<Person> list = new ArrayList();
     FacadeInterface facade;
     ServerResponse sr;
 
     public PersonHandler() {
 
         sr = new ServerResponse();
-        //facade = new Facade(); 
+        facade = new PersonFacadeDB(new Gson()); 
 
     }
 
     @Override
     public void handle(HttpExchange he) throws IOException {
-
-        list.add(new Person("Kasper", "Hald", "234", "123", new AssistentTeacher()));
-        list.add(new Person("Kasper", "Hald", "234", "123", new AssistentTeacher()));
-        list.add(new Person("Kasper", "Hald", "234", "123", new AssistentTeacher()));
 
         String method = he.getRequestMethod().toUpperCase();
         String response = "";
@@ -49,12 +42,11 @@ public class PersonHandler implements HttpHandler {
                     int lastIndex = path.lastIndexOf("/");
                     if (lastIndex > 0) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
+                        System.out.println(id);
                         response = facade.getOnePersonAsJson(id);
                         status = 200;
                     } else {
-                        //response = facade.getPersonsAsJSON();
-                        String json = new Gson().toJson(list);
-                        response = json;
+                        response = facade.getPersonsAsJSON();                        
                         status = 200;
                     }
                 } catch (NumberFormatException nfe) {
@@ -79,15 +71,19 @@ public class PersonHandler implements HttpHandler {
                 }
                 break;
 
-            case "OPTIONS":
+            case "DELETE":
                 System.out.println("DELETE");
                 try {
                     String path = he.getRequestURI().getPath();
+                    System.out.println(path);
                     int lastIndex = path.lastIndexOf("/");
                     if (lastIndex > 0) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
+                        System.out.println(id);
                         Person p = facade.delete(id);
+                        System.out.println(p.toString());
                         response = new Gson().toJson(p);
+                        status = 200;
                     } else {
                         status = 400;
                         response = "no id";

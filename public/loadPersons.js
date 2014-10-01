@@ -2,11 +2,12 @@
 function createTable(data){
     var persons = data;
     var res = "<table border = 1>";
-    res += "<tr><th>FirstName</th><th>LastName</th><th>Mail</th><th>Phone</th></tr>";
+    res += "<tr><th>ID</th><th>FirstName</th><th>LastName</th><th>Mail</th><th>Phone</th></tr>";
 
     if(persons instanceof Array){
         for(var i = 0; i < persons.length; i++){
             res += "<tr>";
+            res += "<td>"  + persons[i].id   +  "</td>";
             res += "<td>"  + persons[i].firstName    +  "</td>";
             res += "<td>"  + persons[i].lastName  +  "</td>";
             res += "<td>"  + persons[i].mail   +  "</td>";
@@ -15,6 +16,7 @@ function createTable(data){
         }
     }else{
         res += "<tr>";
+        res += "<td>"  + persons.id   +  "</td>";
         res += "<td>"  + persons.firstName    +  "</td>";
         res += "<td>"  + persons.lastName  +  "</td>";
         res += "<td>"  + persons.mail   +  "</td>";
@@ -43,7 +45,7 @@ function showAllPersons (){
 }
 
 function showPerson (){
-    $.get("http://localhost:8028/person/1", function(data){
+    $.get("http://localhost:8028/person/"+$("#personToFind").val(), function(data){
         var res = createTable(data);
         $("#personTable").html(res);
     });
@@ -66,8 +68,7 @@ function deletePerson(){
     var personId = $("#personToDelete").val();
 
     $.ajax({
-        url: "http://127.0.0.1:8028/person",
-        type: "DELETE",
-        data: personId
+        url: "http://localhost:8028/person/"+ personId,
+        type: "DELETE"
     }).done( showAllPersons());
 }
