@@ -53,6 +53,17 @@ public class PersonFacadeTest {
 
     @After
     public void tearDown() {
+
+    }
+
+    public void before() {
+        gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
+        trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
+
+        // Only one should be visible when running test
+        instance = new PersonFacadeDB(trans);
+//        instance = new PersonFacadeMock(trans);
     }
 
     /**
@@ -73,7 +84,7 @@ public class PersonFacadeTest {
 
         String expPerson = instance.getOnePersonAsJson(100001);
         String responseFromServer = instance.getPersonsAsJSON();
-        
+
         assertTrue(responseFromServer.contains(expPerson));
     }
 
@@ -132,12 +143,16 @@ public class PersonFacadeTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
-        long id = 100001L;                                                           //== Expecting we are testing on an empty table/database
-        Person personToDelete = new Person("Alu", "Albert", "aluminium@metal.com", "12345678", new Student("Third"));
+        long id = 100000L;                                                           //== Expecting we are testing on an empty table/database
+        Person personToAdd = new Person("Alu", "Albert", "aluminium@metal.com", "12345678", new Student("Third"));
 
-        Person expResult = instance.addPersonFromGson(trans.toJson(personToDelete));
-        Person result = instance.delete(id);
-        assertEquals(expResult.toString(), result.toString());
+        Person deletedPerson = instance.addPersonFromGson(trans.toJson(personToAdd));
+        Person resultPerson = instance.delete(id);
+        String expResultJson = trans.toJson(deletedPerson);
+        String resultJson = trans.toJson(resultPerson);
+//        System.out.println("EXPRESULTJSON " + expResultJson);
+//        System.out.println("RESULTJSON " + resultJson);
+        assertEquals(expResultJson, resultJson);
     }
 
 }

@@ -86,14 +86,21 @@ public class PersonFacadeDB implements FacadeInterface {
         EntityManager emToReturn = emf.createEntityManager();
         return emToReturn;
     }
-
-    private static void createEntityManagerTest() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSideTestPU");
-        EntityManager emToReturn = emf.createEntityManager();
+    
+    private void dropTables(){
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM Person").executeUpdate();
+        em.createQuery("DELETE FROM RoleSchool").executeUpdate();
+        em.createQuery("DELETE FROM Teacher").executeUpdate();
+        em.createQuery("DELETE FROM Student").executeUpdate();
+        em.createQuery("DELETE FROM AssistentTeacher").executeUpdate();
+        em.createQuery("DELETE FROM Course").executeUpdate();
+        em.createQuery("DELETE FROM ClassRoom").executeUpdate();
+        em.createQuery("DELETE FROM TimeBlock").executeUpdate();
+        em.createQuery("DELETE FROM BusinessAcademy").executeUpdate();
+        em.getTransaction().commit();
     }
 
-    public static void main(String[] args) {
-        createEntityManagerTest();
-    }
+
 
 }
