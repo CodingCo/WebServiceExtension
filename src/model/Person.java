@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class Person implements Serializable {
     private String lastName;
 
     @Expose
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private Collection<RoleSchool> roles;
 
     @Expose

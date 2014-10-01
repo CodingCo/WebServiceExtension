@@ -3,6 +3,7 @@ package model;
 import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 

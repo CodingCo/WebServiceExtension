@@ -47,8 +47,8 @@ public class PersonFacadeTest {
         trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
 
         // Only one should be visible when running test
-//        instance = new PersonFacadeDB(trans);
-        instance = new PersonFacadeMock(trans);
+        instance = new PersonFacadeDB(trans);
+//        instance = new PersonFacadeMock(trans);
     }
 
     @After
@@ -72,10 +72,24 @@ public class PersonFacadeTest {
         instance.addPersonFromGson(trans.toJson(p3));
 
         String expPerson = instance.getOnePersonAsJson(100001);
-
         String responseFromServer = instance.getPersonsAsJSON();
+        
+        assertTrue(responseFromServer.contains(expPerson));
+    }
 
-        if (responseFromServer.contains(expPerson)) {
+    /**
+     * Test of getOnePersonAsJson method, of class PersonFacadeMock.
+     */
+    @Test
+    public void testGetOnePersonAsJson() {
+        System.out.println("getOnePersonsAsJSON");
+        Person p1 = new Person("John", "McLaren", "myMail@hotmail.com", "57895879", new Student("Third"));
+        String p1AsJson = trans.toJson(p1, Person.class);
+        instance.addPersonFromGson(p1AsJson);
+        Person fetchedPerson = trans.fromJson(instance.getOnePersonAsJson(100000), Person.class);
+
+        if (fetchedPerson.getId() == 100000 && p1.getFirstName().equals(fetchedPerson.getFirstName())
+                && p1.getPhone().equals(fetchedPerson.getPhone())) {
             assertTrue(true);
         } else {
             assertTrue(false);
@@ -84,30 +98,14 @@ public class PersonFacadeTest {
     }
 
     /**
-     * Test of getOnePersonAsJson method, of class PersonFacadeMock.
-     */
-    @Test
-    public void testGetOnePersonAsJson() {
-        System.out.println("getPersonsAsJSON");
-        Person p1 = new Person("John", "McLaren", "myMail@hotmail.com", "57895879", new Student("Third"));
-        p1.setId(100001l);
-        String p1AsJson = trans.toJson(p1, Person.class);
-        Person fetchedPerson = instance.addPersonFromGson(p1AsJson);
-
-        long p1ID = fetchedPerson.getId();
-        String p1Response = instance.getOnePersonAsJson(p1ID);
-        assertEquals(p1AsJson, p1Response);
-    }
-
-    /**
      * Test of addPersonFromGson method, of class PersonFacadeMock.
      */
     @Test
     public void testAddPersonFromGson() {
-        System.out.println("addPersonFromGson");
+        System.out.println("AddPersonFromGson");
         Person person = new Person("Inger", "Hammerik", "myMail@hotmail.com", "56789589", new Student("Third"));
         instance.addPersonFromGson(trans.toJson(person));
-        long id = 100001;
+        long id = 100000;
         Person expResult = trans.fromJson(instance.getOnePersonAsJson(id), Person.class);
         assertEquals(id, (long) expResult.getId());
     }
