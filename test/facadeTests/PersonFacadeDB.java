@@ -5,6 +5,7 @@ import model.RoleSchool;
 import webinterfaces.FacadeInterface;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javax.persistence.*; // Temp import!
 
 /**
  *
@@ -13,11 +14,13 @@ import com.google.gson.GsonBuilder;
 public class PersonFacadeDB implements FacadeInterface {
 
     Gson trans;
+    EntityManager em;
 
     public PersonFacadeDB(Gson trans) {
         this.trans = trans;
+        this.em = createEntityManager();
     }
-    
+
     @Override
     public String getPersonsAsJSON() {
         return null;
@@ -41,6 +44,12 @@ public class PersonFacadeDB implements FacadeInterface {
     @Override
     public Person delete(long id) {
         return null;
+    }
+
+    private EntityManager createEntityManager() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("noPercistenceYet");
+        EntityManager emToReturn = emf.createEntityManager();
+        return emToReturn;
     }
 
 }
