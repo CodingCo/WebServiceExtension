@@ -42,7 +42,7 @@ public class PersonFacadeMock implements FacadeInterface {
     @Override
     public Person addPersonFromGson(String json) {
         Person personToAdd = trans.fromJson(json, Person.class);
-        personToAdd.setId(100000l + (persons.size() + 1));
+        personToAdd.setId(99999l + (persons.size() + 1));
         persons.add(personToAdd);
         return personToAdd;
     }

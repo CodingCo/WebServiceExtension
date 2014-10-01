@@ -48,7 +48,7 @@ public class PersonFacadeTest {
 
         // Only one should be visible when running test
         instance = new PersonFacadeDB(trans);
-//        instance = new PersonFacadeMock(trans);
+   //     instance = new PersonFacadeMock(trans);
     }
 
     @After
@@ -63,7 +63,7 @@ public class PersonFacadeTest {
 
         // Only one should be visible when running test
         instance = new PersonFacadeDB(trans);
-//        instance = new PersonFacadeMock(trans);
+      //  instance = new PersonFacadeMock(trans);
     }
 
     /**
@@ -146,13 +146,10 @@ public class PersonFacadeTest {
         long id = 100000L;                                                           //== Expecting we are testing on an empty table/database
         Person personToAdd = new Person("Alu", "Albert", "aluminium@metal.com", "12345678", new Student("Third"));
 
-        Person deletedPerson = instance.addPersonFromGson(trans.toJson(personToAdd));
-        Person resultPerson = instance.delete(id);
-        String expResultJson = trans.toJson(deletedPerson);
-        String resultJson = trans.toJson(resultPerson);
-//        System.out.println("EXPRESULTJSON " + expResultJson);
-//        System.out.println("RESULTJSON " + resultJson);
-        assertEquals(expResultJson, resultJson);
+        instance.addPersonFromGson(trans.toJson(personToAdd));
+        String expResultJson = instance.getOnePersonAsJson(id);
+        String deletedPersonJson = trans.toJson(instance.delete(id));
+        assertEquals(expResultJson, deletedPersonJson);
     }
 
 }
