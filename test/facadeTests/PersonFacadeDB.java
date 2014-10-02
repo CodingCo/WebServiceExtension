@@ -33,9 +33,9 @@ public class PersonFacadeDB implements FacadeInterface {
 
     @Override
     public String getOnePersonAsJson(long id) {
-            Query query = em.createQuery("SELECT p FROM Person p WHERE p.id = ?1").setParameter(1, id);
-            Person person = (Person) query.getSingleResult();
-            return trans.toJson(person);
+        Query query = em.createQuery("SELECT p FROM Person p WHERE p.id = ?1").setParameter(1, id);
+        Person person = (Person) query.getSingleResult();
+        return trans.toJson(person);
     }
 
     @Override
@@ -81,8 +81,15 @@ public class PersonFacadeDB implements FacadeInterface {
     }
 
     private EntityManager createEntityManager() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSideTestPU");
-        EntityManager emToReturn = emf.createEntityManager();
-        return emToReturn;
+
+        try {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSideTestPU");
+            EntityManager emToReturn = emf.createEntityManager();
+            return emToReturn;
+        } catch (PersistenceException e) {
+            System.err.println("Problem occured with PU. Make sure it's the right PU.");
+        }
+
+        return null;
     }
 }
