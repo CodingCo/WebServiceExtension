@@ -1,7 +1,17 @@
+/**
+ * Created by Robert & Christopher on 02-10-2014.
+ */
 function bindEvents(){
-  	$("#showPersons").bind("click", showAllPersons);
-  	$("#showPerson").bind("click", showPerson);
-    $("#addPerson").bind("click", addPerson);
-    $("#deletePerson").bind("click", deletePerson);
-    $("#addRole").bind("click", addRole);
+    $("#btn_add").bind("click", addPerson);
+    $("#btn_del").bind("click", deletePerson);
+    $("#btn_addRole").bind("click", addRole);
+    $("#persons").bind("click", function(e) {
+       var id = e.target.id;
+        alert(id);
+        if(isNaN(id)){
+            return;
+        }
+        showPerson(id);
+    });
+
 }

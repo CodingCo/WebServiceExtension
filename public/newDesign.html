@@ -3,6 +3,9 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>New Design tester</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="newDesignScript.js"></script>
+    <script type="text/javascript" src="eventBinding.js"></script>
 </head>
 <body>
 
@@ -31,7 +34,7 @@
     <select id="roles" size="2" style="min-width: 150px; height: 100px;"></select>
     <h2>Add Role</h2>
 
-    <select>
+    <select id = "rolesDropDown">
         <option id="1">Student</option>
         <option id="2">Teacher</option>
         <option id="3">Assistent Teacher</option>
@@ -40,8 +43,8 @@
     <h2>Semester/Degree</h2>
     <form>
         <input id="semDeg" type="text"/><br>
-        <button id="btn_addRole">Add Person</button>
-        <button id="btn_deleteRole" disabled="disabled">Save Person</button>
+        <button id="btn_addRole">Add Role</button>
+        <button id="btn_deleteRole" disabled="disabled">Save Role</button>
     </form>
 
 
