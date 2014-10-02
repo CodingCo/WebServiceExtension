@@ -105,6 +105,7 @@ public class MessageHandler implements Runnable, IHandler {
                     notifyUsers(Protocol.ONLINE + getUsers());
                 } else {
                     notifyReciever(Protocol.SERVER_ONLINE_RESPONSE, m.getIClient());
+                    System.out.println("shiiit");
                 }
             }
         }

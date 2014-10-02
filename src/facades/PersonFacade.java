@@ -93,5 +93,16 @@ public class PersonFacade implements FacadeInterface {
         return null;
 
     }
+    
+    public Person editPerson(String json){
+        Person editedPerson = trans.fromJson(json, Person.class);
+        Person personToEdit = em.find(Person.class, editedPerson.getId());
+        em.getTransaction().begin();
+        personToEdit.setFirstName(editedPerson.getFirstName());
+        personToEdit.setLastName(editedPerson.getLastName());
+        personToEdit.setPhone(editedPerson.getPhone());
+        personToEdit.setMail(editedPerson.getMail());
+        return null;
+    }
 
 }
