@@ -7,7 +7,6 @@ function bindEvents(){
     $("#btn_addRole").bind("click", addRole);
     $("#persons").bind("click", function(e) {
        var id = e.target.id;
-        alert(id);
         if(isNaN(id)){
             return;
         }

@@ -39,7 +39,6 @@ public class PersonHandler implements HttpHandler {
         String response = "";
         int status = 0;
 
-        System.out.println(method);
         switch (method) {
 
             case "GET":
@@ -48,7 +47,6 @@ public class PersonHandler implements HttpHandler {
                     int lastIndex = path.lastIndexOf("/");
                     if (lastIndex > 0) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        System.out.println(id);
                         response = facade.getOnePersonAsJson(id);
                         status = 200;
                     } else {
@@ -62,7 +60,6 @@ public class PersonHandler implements HttpHandler {
                 break;
 
             case "POST":
-                System.out.println("POST");
                 try {
                     InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
                     BufferedReader br = new BufferedReader(isr);
@@ -78,16 +75,12 @@ public class PersonHandler implements HttpHandler {
                 break;
 
             case "DELETE":
-                System.out.println("DELETE");
                 try {
                     String path = he.getRequestURI().getPath();
-                    System.out.println(path);
                     int lastIndex = path.lastIndexOf("/");
                     if (lastIndex > 0) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        System.out.println(id);
                         Person p = facade.delete(id);
-                        System.out.println(p.toString());
                         response = trans.toJson(p);
                         status = 200;
                     } else {
@@ -101,7 +94,6 @@ public class PersonHandler implements HttpHandler {
                 break;
 
             case "PUT":
-                System.out.println("PUT");
                 try {
                     InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
                     BufferedReader br = new BufferedReader(isr);
@@ -112,9 +104,7 @@ public class PersonHandler implements HttpHandler {
                     
                     if (lastIndex > 0) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        System.out.println(jsonInput);
                         RoleSchool r = facade.addRoleSchool(jsonInput, id);
-                        System.out.println(r);
                         response = trans.toJson(r);
                     } else {
                         status = 400;
@@ -128,7 +118,6 @@ public class PersonHandler implements HttpHandler {
                 break;
         }
 
-        System.out.println(response);
         he.getResponseHeaders().add("Content-Type", "application/json");
         sr.sendMessage(he, status, response);
 

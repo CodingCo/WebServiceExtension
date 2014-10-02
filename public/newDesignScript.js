@@ -72,8 +72,8 @@ function addRole(){
         data += "{semester: " + degSem + ", roleName: Student}";
     }else if (roleName.toLowerCase() === "teacher") {
         data += "{degree: " + degSem + ", roleName: Teacher}";
-    }else if (roleName.toLowerCase() === "assistent teacher") {
-        data += "{"+$("#roleName").val()+"}";
+    }else {
+        data += "{roleName: AssistentTeacher}";
     }
 
     $.ajax({
@@ -87,10 +87,6 @@ function addRole(){
 function showAllPersons (){
     $.ajax({
         url:"http://localhost:8028/person",
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
-        },
         dataType: 'json'
 
     }).done(function(persons){
