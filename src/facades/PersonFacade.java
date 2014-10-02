@@ -82,7 +82,7 @@ public class PersonFacade implements FacadeInterface {
 
         try {
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSideTestPU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSidePU");
             EntityManager emToReturn = emf.createEntityManager();
             return emToReturn;
 
