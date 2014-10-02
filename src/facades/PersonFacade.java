@@ -5,7 +5,7 @@ import model.RoleSchool;
 import webinterfaces.FacadeInterface;
 import com.google.gson.Gson;
 import java.util.List;
-import javax.persistence.*; // Temp import!
+import javax.persistence.*;
 import model.AssistentTeacher;
 import model.Student;
 import model.Teacher;
@@ -82,12 +82,12 @@ public class PersonFacade implements FacadeInterface {
 
         try {
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSideTestPU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("conPU");
             EntityManager emToReturn = emf.createEntityManager();
             return emToReturn;
 
         } catch (PersistenceException e) {
-            System.err.println("Prolem finding Persitence Unit!");
+            System.err.println("Problem finding Persitence Unit!");
         }
 
         return null;
