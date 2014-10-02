@@ -1,8 +1,11 @@
 package handlers;
 
+import facades.PersonFacade;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import facades.RoleSchoolAdapter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,12 +21,15 @@ public class PersonHandler implements HttpHandler {
 
     FacadeInterface facade;
     ServerResponse sr;
-
+    GsonBuilder gsonBuilder;
+    Gson trans;
+    
     public PersonHandler() {
-
         sr = new ServerResponse();
-        facade = new PersonFacadeDB(new Gson());
-
+        gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
+        trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
+        facade = new PersonFacade(trans);
     }
 
     @Override
@@ -63,7 +69,7 @@ public class PersonHandler implements HttpHandler {
                     String jsonInput = br.readLine();
 
                     Person p = facade.addPersonFromGson(jsonInput);
-                    response = new Gson().toJson(p);
+                    response = trans.toJson(p);
 
                 } catch (IllegalArgumentException e) {
                     status = 400;
@@ -82,7 +88,7 @@ public class PersonHandler implements HttpHandler {
                         System.out.println(id);
                         Person p = facade.delete(id);
                         System.out.println(p.toString());
-                        response = new Gson().toJson(p);
+                        response = trans.toJson(p);
                         status = 200;
                     } else {
                         status = 400;
@@ -109,7 +115,7 @@ public class PersonHandler implements HttpHandler {
                         System.out.println(jsonInput);
                         RoleSchool r = facade.addRoleSchool(jsonInput, id);
                         System.out.println(r);
-                        response = new Gson().toJson(r);
+                        response = trans.toJson(r);
                     } else {
                         status = 400;
                         response = "no id";

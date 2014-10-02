@@ -48,7 +48,7 @@ public class PersonFacadeTest {
 
         // Only one should be visible when running test
         instance = new PersonFacadeDB(trans);
-   //     instance = new PersonFacadeMock(trans);
+//        instance = new PersonFacadeMock(trans);
     }
 
     @After

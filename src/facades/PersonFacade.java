@@ -1,4 +1,4 @@
-package handlers;
+package facades;
 
 import model.Person;
 import model.RoleSchool;
@@ -14,12 +14,12 @@ import model.Teacher;
  *
  * @author ThomasHedegaard
  */
-public class PersonFacadeDB implements FacadeInterface {
+public class PersonFacade implements FacadeInterface {
 
     Gson trans;
     EntityManager em;
 
-    public PersonFacadeDB(Gson trans) {
+    public PersonFacade(Gson trans) {
         this.trans = trans;
         this.em = createEntityManager();
     }
@@ -27,7 +27,6 @@ public class PersonFacadeDB implements FacadeInterface {
     @Override
     public String getPersonsAsJSON() {
         List<Person> result = em.createQuery("SELECT p FROM Person p").getResultList();
-        System.err.println("Number of persons: " + result.size());
         return trans.toJson(result);
     }
 
@@ -64,7 +63,6 @@ public class PersonFacadeDB implements FacadeInterface {
         Person person = em.find(Person.class, id);
         if (person != null && role != null) {
             person.addRole(role);
-            //== Maybe use persist, or merge
         }
         em.getTransaction().commit();
 
@@ -81,18 +79,9 @@ public class PersonFacadeDB implements FacadeInterface {
     }
 
     private EntityManager createEntityManager() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSideTestPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSidePU");
         EntityManager emToReturn = emf.createEntityManager();
         return emToReturn;
-    }
-
-    private static void createEntityManagerTest() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSideTestPU");
-        EntityManager emToReturn = emf.createEntityManager();
-    }
-
-    public static void main(String[] args) {
-        createEntityManagerTest();
     }
 
 }
