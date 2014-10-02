@@ -38,7 +38,6 @@ public class PersonHandler implements HttpHandler {
         String method = he.getRequestMethod().toUpperCase();
         String response = "";
         int status = 0;
-
         switch (method) {
 
             case "GET":
@@ -102,11 +101,15 @@ public class PersonHandler implements HttpHandler {
                     String path = he.getRequestURI().getPath();
                     int lastIndex = path.lastIndexOf("/");
                     
-                    if (lastIndex > 0) {
+                    if (lastIndex > 0 && jsonInput.contains("roleName")) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
                         RoleSchool r = facade.addRoleSchool(jsonInput, id);
                         response = trans.toJson(r);
-                    } else {
+                    } else if(lastIndex > 0 && jsonInput.contains("firstName")){
+                        int id = Integer.parseInt(path.substring(lastIndex + 1));
+                        Person editedPerson = facade.editPerson(jsonInput, id);
+                        response = trans.toJson(editedPerson);
+                    }else {
                         status = 400;
                         response = "no id";
                     }

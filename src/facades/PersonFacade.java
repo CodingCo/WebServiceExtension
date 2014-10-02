@@ -4,6 +4,7 @@ import model.Person;
 import model.RoleSchool;
 import webinterfaces.FacadeInterface;
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import model.AssistentTeacher;
@@ -94,15 +95,17 @@ public class PersonFacade implements FacadeInterface {
 
     }
     
-    public Person editPerson(String json){
+    @Override
+    public Person editPerson(String json, long id){
         Person editedPerson = trans.fromJson(json, Person.class);
-        Person personToEdit = em.find(Person.class, editedPerson.getId());
+        Person personToEdit = em.find(Person.class, id);
         em.getTransaction().begin();
         personToEdit.setFirstName(editedPerson.getFirstName());
         personToEdit.setLastName(editedPerson.getLastName());
         personToEdit.setPhone(editedPerson.getPhone());
         personToEdit.setMail(editedPerson.getMail());
-        return null;
+        em.getTransaction().commit();
+        return personToEdit;
     }
 
 }
