@@ -3,10 +3,8 @@
  */
 
 $(document).ready(function(){
-
     showAllPersons();
     bindEvents();
-
 });
 
 function showPerson (id){
@@ -49,7 +47,9 @@ function addPerson(){
         url: "http://localhost:8028/person",
         type: "POST",
         data: data
-    }).done();
+    }).done(function(){
+        showAllPersons()
+    });
 
 }
 

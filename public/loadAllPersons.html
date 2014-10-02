@@ -32,6 +32,7 @@
     <div class="row">
         <div class="col-md-7">
             <h3>Person View</h3>
+
             <div class="form-group">
                 <select class="form-control" id="persons" size="2" style="min-width: 150px; height: 200px;"></select>
             </div>
@@ -54,9 +55,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" id="btn_add">Add Person</button>
-                    <button class="btn btn-primary" id="btn_save" disabled="disabled">Save Person</button>
-                    <button class="btn btn-primary" id="btn_del">Delete Person</button>
+                    <input type="submit" class="btn btn-primary" value="add person" id="btn_add"/>
+                    <button type="button" class="btn btn-primary" id="btn_save" disabled="disabled">Save Person</button>
+                    <button type="button" class="btn btn-primary" id="btn_del">Delete Person</button>
                 </div>
             </form>
         </div>
@@ -64,7 +65,8 @@
 
 
         <div class="col-md-5">
-                <h3>Add Role</h3>
+            <h3>Add Role</h3>
+
             <div class="form-group">
                 <select class="form-control" id="roles" size="2" style="min-width: 150px; height: 200px;"></select>
             </div>
@@ -79,31 +81,20 @@
 
             <div style="margin-top: 84px;"></div>
             <h4>Semester/Degree</h4>
+
             <form role="form">
 
                 <div class="form-group">
                     <input class="form-control" id="semDeg" type="text"/>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" id="btn_addRole">Add Role</button>
-                    <button class="btn btn-primary" id="btn_deleteRole" disabled="disabled">Save Role</button>
+                    <button type="button" class="btn btn-primary" id="btn_addRole">Add Role</button>
+                    <button type="button" class="btn btn-primary" id="btn_deleteRole" disabled="disabled">Save Role
+                    </button>
                 </div>
-
-
             </form>
-
-
         </div>
     </div>
-
-
-
-
-
-    <script>
-        bindEvents();
-    </script>
-
 
 </div>
 <!-- FOOTER-->
