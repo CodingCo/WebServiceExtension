@@ -16,7 +16,7 @@ import serverinterfaces.IHandler;
 public class AdminHandler implements HttpHandler {
 
     private final String contentFolder = "logfiles/";
-    private final IHandler handler;
+    private IHandler handler;
     private final ServerResponse response = new ServerResponse();
 
     public AdminHandler(IHandler handler) {
@@ -26,11 +26,33 @@ public class AdminHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange he) throws IOException {
 
+        String resource = he.getRequestURI().getPath().substring(5);
+        System.out.println(resource);
+        
+        String contentType;
+        
+        if (resource.equals("online")) {
+            String onlineUsers = handler.getUsers();
+            String json = "[";
+            System.out.println(onlineUsers);
+            contentType = "application/json";
+            for (String user : onlineUsers.split(",")) {
+                json += "{ name: ";
+                json += user;
+                json += "},";
+            }
+            json += "]";
+            
+        }
+        
+        
+        
+        
         File logFile = new File(contentFolder + "serverlog0.txt");
         BufferedReader input = new BufferedReader(new FileReader(logFile));
         StringBuilder br = new StringBuilder();
 
-        String onlineUsers = handler.getUsers();
+        
 
         String line;
         while ((line = input.readLine()) != null) {
