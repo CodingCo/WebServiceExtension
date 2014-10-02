@@ -19,6 +19,7 @@ function createTable(data){
         res += "<td>"  + persons.id   +  "</td>";
         res += "<td>"  + persons.firstName    +  "</td>";
         res += "<td>"  + persons.lastName  +  "</td>";
+        res += "<td>"  + persons.roles[0].id  +  "</td>";
         res += "<td>"  + persons.mail   +  "</td>";
         res += "<td>"  + persons.phone   +  "</td>";
         res += "</tr>";
@@ -80,7 +81,11 @@ function addRole(){
     var data = "";
 
     if (roleName.toLowerCase() === "student") {
-        data += "{semester: "+$("#semester").val() + ", roleName: "+$("#roleName").val()+"}";
+        data += "{semester: "+$("#semester").val() + ", roleName: Student}";
+    }else if (roleName.toLowerCase() === "teacher") {
+        data += "{degree: "+$("#degree").val() + ", roleName: Teacher}";
+    }else if (roleName.toLowerCase() === "student") {
+        data += "{"+$("#roleName").val()+"}";
     }
 
     $.ajax({
@@ -89,7 +94,4 @@ function addRole(){
         dataType: "json",
         data: data
     }).done( showAllPersons());
-
-
-
 }
