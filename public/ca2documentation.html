@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- G5 MEMEBER NAME-->
+    <title>G5</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
+
+<div class="container">
+
+    <h1>CA 2 documentation</h1>
+
+
+    <div class="panel panel-default">
+        <!-- DESIGN-->
+        <div class="panel-body">
+            <h3>Design</h3>
+
+            <p>
+                This CA builds upon the project from CA1, so we’ll be able to host the website, run the chatServer(CA1)
+                and offer the new REST-services we’ve been making in this CA.
+            </p>
+            <ul class="list-group">
+                <li class="list-group-item disabled">
+                    The new classes added in this project:
+                </li>
+                <li class="list-group-item">PersonFacade</li>
+                <li class="list-group-item">RoleSchoolAdapter</li>
+                <li class="list-group-item">PersonHandler</li>
+                <li class="list-group-item">All entity Classes in model-package: Person, Roleschool, Course, etc.</li>
+                <li class="list-group-item">Test: All classes in package facadeTests.</li>
+                <li class="list-group-item">Interface: FacadeInterface</li>
+            </ul>
+            <p>
+                We’ve created a JUnit test of the class PersonFacade. This is relevant for the assignment, because this
+                class handles all JPA calls, which persists data on the database. Because of the importance of this
+                class, we wanted a well written test that verifies the functionality. We’re testing both on a mock(a
+                class that “acts as a database”), which uses its own collection to to store data, and a test
+                database(PersonFacadeDB).
+                The class PersonFacade is used to persist data on the database using JPA. It acts like a “facade”,
+                because the class is the link between the application and the database(Like we made facade classes in
+                2.sem project, to call each layer functionality). We use PersonFacade every time we want to deal with
+                info about a person.
+                Note that all our entities is placed under the model package. We use JPA to map our entity classes to
+                our database. Our approach was to create the classes in java first, and then use JPA to generate all the
+                tables on the database, based on the annotations on each entity class.
+                We use only the PersonHandler class for handling the database calls for Person and the Roleschool
+                objects. Since there is only one method related to RoleSchool, we decided to include it in the
+                PersonHandler class.
+            </p>
+        </div>
+
+        <!-- TEST-->
+        <div class="panel-body">
+            <h3>Test</h3>
+
+            <p>
+                We added an additional test-package to our Test Packages folder named “facadeTests”.
+                It consist of the following java-classes; “PersonFacadeDB”, “PersonFacadeMock”, “RoleSchoolAdapter” and
+                the crucial testfile “PersonFacadeTest”.
+            </p>
+
+            <p>
+                We created a JUnit test that should test our facade class. First we wanted to test up against a class,
+                that did not need a physical database. Therefore we wanted to make use of Mocking, and created
+                the “PersonFacadeMock” and the “PersonFacadeDB”, both implementing an interface named “IPersonFacade”.
+                This secures, that both facade-classes should contain some specific methods, that are stated in the
+                interface.
+            </p>
+
+            <p>
+                When unit-testing, we created our file “PersonFacadeTest”, that has a test-method for each method
+                located in the interface, and that makes the testfile capable of testing the same behavior on
+                “PersonFacadeMock” and the “PersonFacadeDB”.
+                The “PersonFacadeMock” works up against a collection of persons, that is a replacement of the database
+                we are going to use in the final version, but the behavior is exactly the same whether we are testing up
+                against a collection of persons or a DB with the necessary tables.
+                In the final version we should use our “PersonFacadeDB”, that uses JPA to manipulate with entities
+                inside our DB.
+            </p>
+
+            <p>
+
+                It is a good habit, when developing programs that are dependent on a database, to test up against a
+                Mock-database at first, which we earlier stated only is a collection.
+                This test-class should be adaptable to test up against both facades, so we can avoid to create two
+                almost identical test-classes, one for each facade.
+                When the result of the tests on our Mock is 100% error-free, we can start to develop our real facade,
+                that is working with the DB and test it later on with the exact same testmethods.
+            </p>
+
+            <p>
+                Because we let the two facades implement the same interface, it was possible to test up against our mock
+                and our real database. Inside our test-class we created a method with the @Before annotation, which
+                ensures, that everything inside the body is executed BEFORE every single test-method.
+                This method contains a new instantiation of the specific Facade we are creating, so every test-method is
+                working with a an empty collection or DB.
+                The collection is instantiated in the constructor of “PersonFacadeMock” and an entitymanager is
+                instantiated in the constructor of “PersonFacadeDB”, that works with our persistence.xml, with the
+                “drop-and-create” Table Generation Strategy. This strategy empties the tables we are working with in the
+                DB.
+            </p>
+
+        </div>
+        <div class="panel-body">
+            <h3>inheritance</h3>
+
+            <p>
+                We have multiple strategies to choose from, when we want to map an inheritance solution from the OO
+                world, to the relational world using JPA: JOINED, TABLE_PER_CLASS or SINGLE_TABLE.
+            </p>
+
+            <p>
+                The abstract class RoleSchool, has three subclasses: Teacher, Student and AssistentTeacher. The super
+                class RoleSchool(which is the highest class in the hiarchy) must be mapped with an inheritance strategy,
+                if none is defined, JPA uses InheritanceType.SINGLE_TABLE as default strategy.
+            </p>
+
+            <p>
+                The assignment required us to choose from either single table or joined. We ended up with the single
+                table strategy. We did this because it’s simple to understand, and a faster solution, if the database
+                gets many queries(comparing this to the alternative join strategy). The simplicity is of course the fact
+                that we only have one table, and because of the attribute DTYPE. This attribute is the
+                “discriminator”-value, which descriminates each tuple from each other, telling us what every tuple is;
+                Student, Teacher or AssistentTeacher.
+            </p>
+
+            <p>
+                As mentioned above, the single table strategy is faster than joined, which is one of the reason we
+                didn’t choose joined. Unlike the single strategy, the joined solution creates multiple join operations,
+                if we query data that covers more than one class of the class hierarchy. If we chose join, the database
+                would have a table for every single entity, containing data specific for that subclass. A table would
+                also be generated for the super class. This is also why this solution is considered a bit more
+                “OO-friendly”.
+            </p>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- G5 MEMEBER NAME-->
+    <title>Thomases page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
+
+<div class="container">
+    <div class="jumbotron">
+
+        <!-- G5 MEMEBER NAME-->
+        <h1>Thomas Hedegaard</h1>
+
+        <p>aka. Mr. pattern express</p>
+    </div>
+
+    <div class="row">
+
+        <!-- KA1-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 1</h3>
+
+                    <p> Primary work was designing the client logic, along with the swing components. Worked with
+                        Christopher on the Gui.
+                        Also helped with designing the architecture of the server, to make it testable and SOLID
+                        safe.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">chatclient</li>
+                        <li class="list-group-item list-group-item-success">chatserver</li>
+                    </ul>
+                    <div class="well-sm">commits on github: #</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KA2-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 2</h3>
+
+                    <p> Christopher and Thomas used TDD on PersonFacade: made the FacadeTest, FacadeMock and FacadeDB.
+                        Made the real PersonFacade, when all tests were complete. Refactored entities aswell.
+                        Thomas wrote the Adapter Class that serializes/deserializes the RoleSchool entity, with
+                        Christopher. Thomas wrote the documentation on inheritance strategy.
+                    </p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">JPA</li>
+                        <li class="list-group-item list-group-item-success">Test</li>
+                    </ul>
+                    <div class="well-sm">commits on github: 19</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
+</body>
+</html>

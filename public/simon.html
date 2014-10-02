@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- G5 MEMEBER NAME-->
+    <title>Simons page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
+
+<div class="container">
+    <div class="jumbotron">
+
+        <!-- G5 MEMEBER NAME-->
+        <h1>Simon Grønborg</h1>
+
+        <p>Aka. The coding ninja</p>
+    </div>
+
+    <div class="row">
+
+        <!-- KA1-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 1</h3>
+
+                    <p> He wrote the chat server with some design assistance from Robert and Thomas, and some extreme
+                        programming with Robert. He also rewrote parts of the web server to create the dynamic admin
+                        page. The website is entirely his design and work. It is created using bootstrap and simple HTML
+                        and CSS3. Parts of the test is also made by him.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">testing</li>
+                        <li class="list-group-item list-group-item-success">website & webserver</li>
+                        <li class="list-group-item list-group-item-success">chatserver</li>
+                    </ul>
+                    <div class="well-sm">commits on github: #</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KA2-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 2</h3>
+
+                    <p>
+                        Simon worked on the refactoring of the Server/webserver from the first CA, to improve it’s
+                        structure and make it compatible with this CA.
+                        Simon wrote the HTML for extension to the WebPage and a lot of refactor/cleaning in the old
+                        HTML.
+                    </p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">Html</li>
+                        <li class="list-group-item list-group-item-success">WebServer</li>
+                    </ul>
+                    <div class="well-sm">commits on github: #</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
+</body>
+</html>

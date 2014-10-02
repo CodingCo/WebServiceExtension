@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- G5 MEMEBER NAME-->
+    <title>kaspers page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
+
+<div class="container">
+    <div class="jumbotron">
+
+        <!-- G5 MEMEBER NAME-->
+        <h1>kasper Hald</h1>
+        <p>aka. Det er fint nok</p>
+    </div>
+
+    <div class="row">
+
+        <!-- KA1-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 1</h3>
+
+                    <p> kasper created some JUnit tests to the chatserver. He also wrote some mockobjects.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">testing</li>
+                    </ul>
+                    <div class="well-sm">commits on github: #</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KA2-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 2</h3>
+
+                    <p> Worked with Robert in the PersonHandler class, and the functionality behind the webpage database calls with jQuery</p>
+                    <ul class="list-group">
+
+                    </ul>
+                    <div class="well-sm">commits on github: 0</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
+</body>
+</html>

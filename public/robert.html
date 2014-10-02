@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- G5 MEMEBER NAME-->
+    <title>Roberts page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
+
+<div class="container">
+    <div class="jumbotron">
+
+        <!-- G5 MEMEBER NAME-->
+        <h1>Robert Elving</h1>
+
+        <p>aka. mr. uml</p>
+    </div>
+
+    <div class="row">
+
+        <!-- KA1-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 1</h3>
+
+                    <p> Worked on the webserver and created the logic, and handlers for the HTTP requests. Helped
+                        integrate
+                        the webserver in the same program of the chatserver. Also worked on the architecture of the
+                        chatserver.
+                        He and simon did some extreme programming to fix the chatserver.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">chatserver</li>
+                        <li class="list-group-item list-group-item-success">webserver</li>
+                    </ul>
+                    <div class="well-sm">commits on github: #</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KA2-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 2</h3>
+
+                    <p>
+                        Robert wrote the PersonHandler Class with Kasper who helped on the sideline by looking up problems on the web.
+                        Robert also wrote the web interface(Ajax/JQuery) that uses the webService. Kasper helped here by looking over his shoulder giving inputs on problems and supplying information from the assignment document about which format data was sent.
+                        Robert wrote the documentation on “who did what” and commits..</p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">Restfull serverside</li>
+                        <li class="list-group-item list-group-item-success">ajax</li>
+                    </ul>
+                    <div class="well-sm">commits on github: 17</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
+</body>
+</html>

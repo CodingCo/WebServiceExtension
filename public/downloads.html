@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Downloads</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
+<div class="container">
+
+    <!-- DOWNLOAD CLIENT-->
+    <div class="media">
+        <a class="pull-left" href="files/ChatBraveheart.zip">
+            <img class="img-thumbnail" src="images/chatclient.png" alt="" style="height: 120px;">
+        </a>
+
+        <div class="media-body">
+            <h4 class="media-heading">G5 Chatclient</h4>
+            It is finally here! The G5 Chatserver made by the incredibelly code ninjas from the original Gang of Five programmer, from
+            copenhangen business academy. With extreme performance and well designed simplistic userinterface.. Who am i kidding! The program is ugly
+            but who cares. It's well made with extreme effort, entusiasm and ambision. We might not be designers but we shure love to program.
+            <div class="well-sm"><a href="https://github.com/CodingCo/Client">View on github</a> </div>
+        </div>
+
+    </div>
+
+    <!-- DOWNLOAD SERVER-->
+    <div class="media">
+        <a class="pull-left" href="files/Server-master.zip">
+            <img class="media-object img-thumbnail" src="images/server.png" alt="" style="height: 120px;">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">G5 Chatserver</h4>
+            Ah.. we thought you would be back. Downloaded the client eh!? Well it does work with other clients supporting the Lars Mortensen protocol.
+            But we are pretty much the only team able to deliver something, so you will need our server aswell. But fear not. It works like a charm
+            and it is even made so you can run it from a unix system and windows. It is also avialable on git like everything else we create.
+            <div class="well-sm"><a href="https://github.com/CodingCo/Server">View on github</a> </div>
+        </div>
+    </div>
+
+    <!-- DOWNLOAD WEBSERVER-->
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="img-thumbnail" src="images/web.png" alt="" style="height: 120px;">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">G5 Webserver</h4>
+            It took some time, but now we are here! The G5 webserver is finally here, fully integrated with the chatserver. This
+            new web extension support restful webservices and awesome new features for you to find.
+            The newest feature is the JPA integration. We now have built in a system to crete persons and manage institutions.
+            Click and download
+            <div class="well-sm"><a href="https://github.com/CodingCo/WebServiceExtension">View on github</a> </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,64 +1,117 @@
 <!DOCTYPE html>
 <html>
-	<head lang="en">
-   		<meta charset="UTF-8">
-		<title>Load all players Test</title> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>G5 facility ERP System</title>
 
-      <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-   	  <script type="text/javascript" src="loadPersons.js"></script> 
-      <script type="text/javascript" src="eventBinding.js"></script>
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script type="text/javascript" src="javascript/eventBinding.js"></script>
+    <script type="text/javascript" src="javascript/newDesignScript.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="bootstrap/js/bootstrap.js"></script>
 
-	</head>
+</head>
+<body>
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
 
-	<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Person Service</h1>
 
-		<h1>Show persons</h1>
-		<br/>
-		<hr/>
-   		<div id="inputField" style="align-items: stretch">
-    	First Name:<input type="text" id="firstName"/><br/>
-    	Last  Name:<input type="text" id="lastName"/><br/>
-    	Mail      :<input type="text" id="mail"/><br/>
-    	Phone     :<input type="number" id="phone"/><br/>
-    	</div>
-
-    	<button id="addPerson">Add person</button>
-    	<br/>
-
-    	<button id="showPersons">Show all</button>
-
-    	<br/>
-    	<br/>
-
-    	Person to find: <input type="number" id="personToFind"/><br/>
-    	<button id="showPerson">Show Person</button>
-    	
-    	<br/><br/>
-    	Person to delete:  <input type="number" id="personToDelete"/><br/>
-    	<button id="deletePerson">Delete Person</button>
-
-    	<br/><br/>
+    </div>
 
 
-    	Add Role to Person with Id:  <input type="number" id="personToRole"/><br/>
-    	
- 		RoleName     :<input type="text" id="roleName"/><br/>
-    	Degree     	 :<input type="text" id="degree"/><br/>
-    	Semester     :<input type="text" id="semester"/><br/>
-    	<button id="addRole">Add Role</button>
-    	<br/>
-    	<br/>
-    	
+    <div class="row">
+        <div class="col-md-7">
+            <h3>Person View</h3>
+            <div class="form-group">
+                <select class="form-control" id="persons" size="2" style="min-width: 150px; height: 200px;"></select>
+            </div>
+            <form role="form">
+                <div class="form-group">
+                    <input class="form-control" id="fName" type="text" placeholder="First name" required=""/>
+                </div>
 
-		<div id="personTable"></div>
+                <div class="form-group">
+                    <input class="form-control" id="lName" type="text" placeholder="Last name" required=""/>
+                </div>
+                <div class="form-group">
+
+                    <input class="form-control" id="phone" type="text" placeholder="phone" required=""/>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">@</span>
+                        <input class="form-control" id="mail" type="text" placeholder="email" required=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id="btn_add">Add Person</button>
+                    <button class="btn btn-primary" id="btn_save" disabled="disabled">Save Person</button>
+                    <button class="btn btn-primary" id="btn_del">Delete Person</button>
+                </div>
+            </form>
+        </div>
+        <!-- 2ND SECTION -- RIGHT SIDE OF PAGE-->
 
 
-    	<script>
-       		bindEvents();
-    	</script>
+        <div class="col-md-5">
+                <h3>Add Role</h3>
+            <div class="form-group">
+                <select class="form-control" id="roles" size="2" style="min-width: 150px; height: 200px;"></select>
+            </div>
+            <div class="form-group">
+                <select class="form-control">
+                    <option id="1">Student</option>
+                    <option id="2">Teacher</option>
+                    <option id="3">Assistent Teacher</option>
+                </select>
+            </div>
 
 
-	</body>
+            <div style="margin-top: 84px;"></div>
+            <h4>Semester/Degree</h4>
+            <form role="form">
+
+                <div class="form-group">
+                    <input class="form-control" id="semDeg" type="text"/>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id="btn_addRole">Add Role</button>
+                    <button class="btn btn-primary" id="btn_deleteRole" disabled="disabled">Save Role</button>
+                </div>
 
 
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        bindEvents();
+    </script>
+
+
+</div>
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
+</body>
 </html>

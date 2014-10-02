@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- G5 MEMEBER NAME-->
+    <title>Christophers page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
+
+<div class="container">
+    <div class="jumbotron">
+
+        <!-- G5 MEMEBER NAME-->
+        <h1>Christopher Mortensen</h1>
+
+        <p>aka. candy man</p>
+    </div>
+
+    <div class="row">
+
+        <!-- KA1-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 1</h3>
+
+                    <p> Worked on the chat client, along with Thomas. Primarily focused his work on creating the Gui,
+                        and implementing the functionality.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">chatclient</li>
+                        <li class="list-group-item list-group-item-success">swing</li>
+                    </ul>
+                    <div class="well-sm">commits on github: #</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KA2-->
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>KA 2</h3>
+
+                    <p>
+                        Worked with Thomas on the Facade: Tested the Facade Class up against a MockDatabase and a “real”
+                        database.
+                        Christopher wrote the Adapter Class that serializes/deserializes the RoleSchool entity, with
+                        Thomas.
+                        Christopher wrote the documentation on Testing.
+                    </p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">JPA</li>
+                        <li class="list-group-item list-group-item-success">Test</li>
+                    </ul>
+                    <div class="well-sm">commits on github: 18</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
+</body>
+</html>

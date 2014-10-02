@@ -1,41 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Gang of five</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="indexstyle.css"/>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Gang of Five</title>
 
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="transaction.js"></script>
 </head>
 <body>
-<div class="nav-wrap">
-    <div class="container">
-        <ul class="nav nav-pills pull-left">
-            <li class="active"><a href="#">Frontpage</a></li>
-            <li><a href="documentation.html">Documentation</a></li>
-            <li><a href="wireshark.html">wireshark</a></li>
-            <li><a href="/log">Admin</a></li>
-        </ul>
-        <ul class="nav nav-pills pull-right">
-            <li><a href="https://github.com/CodingCo/Client">View on Github</a></li>
-            <li><a href="ChatBraveheart.zip">Download G5Chat</a></li>
-        </ul>
-    </div>
-</div>
-
-
-
-
+<!-- include navigation-->
+<div id="nav-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#nav-container").load("navigation.html");
+    });
+</script>
+<!-- end-->
 
 <div class="container">
     <div class="jumbotron">
-        <h1> G5Chat</h1>
-        <img src="images/chat.png" alt=""/>
+        <h1> Gang of Five</h1>
 
-        <p>Fully featured, nimble designed, seamlessly connected chatclient and server... made just for you</p>
-
+        <p>The awsome team who brought you G5 chat</p>
     </div>
 
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>Read me! I am Important</h4>
+                    <p>
+                        To see and use the 2nd CA project, you must press <code> Person Control</code> on the navigation bar.
+                        That will bring you to the html page, where you can use the system, connected with the server JPA.
+                    </p>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>New system design</h4>
+                    <p>important note: Our 2nd CA project is not build from scratch. We merged it with the previous assignment, the chatserver,
+                    because we thought it would prove a greater challange. It is propably also how you would do it in the real world.
+                    More or less everything have been giving an overhaul, and the system has been refactored to fit in with the new part.
+                    We have also chosen an overall more modular design</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <!-- Default panel contents -->
@@ -45,6 +66,7 @@
         <div class="panel-body">
             <p>the commands available to control brav3h3art chatserver and webpage</p>
         </div>
+
         <!-- List group -->
         <ul class="list-group">
             <li class="list-group-item">
@@ -66,80 +88,14 @@
     </div>
 
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Server and Client design</h3>
-        </div>
-        <div class="panel-body">
-            <h4>Client</h4>
-
-            <p>
-                In the client application, every class has its own interface. An observer pattern has been
-                implemented
-                in
-                the
-                GUI class and clientSide class, which calls for an interface solution. This makes it possible, not
-                having
-                the
-                Swing interface “blocked”, while waiting for a response(in this case a message) from the server.
-
-                Originally, the program only had one interface: ”ViewListener”, which was implemented in the GUI. We
-                then
-                added
-                the SocketClass, which contains the thread that listens for inputs from the server. We thought the
-                best
-                way
-                to
-                tell ClientSide that a new message had arrived, was to contain it as an observer of SocketClass.
-                That
-                way,
-                we
-                can do it, without SocketClass knowing anything about ClientSide class.
-
-                The SocketClass also implements an interface: “SocketIF”. This way, it’s easier to use another
-                connector
-                class
-                in the program, thous it implements the SocketIF interface. This also makes it easier to set op a
-                mock.
-            </p>
-
-            <div class="well"> The awesome client</div>
-        </div>
-
-
-        <div class="panel-body">
-            <h4>Server</h4>
-
-            <p>
-                The ServerSide project gets started from the class ServerExecutor. This class starts both the
-                ChatServer
-                and
-                the
-                WebServer.
-
-                Overall we’ve tried to create a layer of abstraction by making interfaces. This also makes it easier
-                for
-                us
-                to
-                test(making mockups). We’ve tried to aim for high testability in all our classes, hence it has a lot
-                of
-                responsibilities.
-
-                The server logs to a file, using a FileHandler. This way, we can log everything that happens on the
-                server.
-            </p>
-
-            <div class="well"> The awesome server</div>
-        </div>
-    </div>
-
-
 </div>
-<div class="container">
-    <footer>
-        <p>this website is made by G5 - viewed best in desktop browser</p>
-    </footer>
-</div>
+
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
 </body>
-
 </html>
