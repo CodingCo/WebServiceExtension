@@ -28,7 +28,6 @@ public class PersonFacadeDB implements FacadeInterface {
     @Override
     public String getPersonsAsJSON() {
         List<Person> result = em.createQuery("SELECT p FROM Person p").getResultList();
-        System.err.println("Number of persons: " + result.size());
         return trans.toJson(result);
     }
 
@@ -50,7 +49,7 @@ public class PersonFacadeDB implements FacadeInterface {
 
     @Override
     public RoleSchool addRoleSchool(String json, long id) {
-        RoleSchool role = null;
+        RoleSchool role = trans.fromJson(json, RoleSchool.class);
         if (json.contains("Teacher")) {
             role = trans.fromJson(json, Teacher.class);
         }
@@ -86,21 +85,4 @@ public class PersonFacadeDB implements FacadeInterface {
         EntityManager emToReturn = emf.createEntityManager();
         return emToReturn;
     }
-    
-    private void dropTables(){
-        em.getTransaction().begin();
-        em.createQuery("DELETE FROM Person").executeUpdate();
-        em.createQuery("DELETE FROM RoleSchool").executeUpdate();
-        em.createQuery("DELETE FROM Teacher").executeUpdate();
-        em.createQuery("DELETE FROM Student").executeUpdate();
-        em.createQuery("DELETE FROM AssistentTeacher").executeUpdate();
-        em.createQuery("DELETE FROM Course").executeUpdate();
-        em.createQuery("DELETE FROM ClassRoom").executeUpdate();
-        em.createQuery("DELETE FROM TimeBlock").executeUpdate();
-        em.createQuery("DELETE FROM BusinessAcademy").executeUpdate();
-        em.getTransaction().commit();
-    }
-
-
-
 }
