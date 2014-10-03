@@ -4,7 +4,9 @@
 
 $(document).ready(function(){
     showAllPersons();
+    getAcademies();
     bindEvents();
+    transactionStatus("succes");
 });
 
 function showPerson (id){
@@ -47,8 +49,13 @@ function addPerson(){
         url: "http://localhost:8028/person",
         type: "POST",
         data: data
-    }).done(function(){
-        showAllPersons()
+    }).done(function(user){
+        showAllPersons();
+        if(user != null){
+            transactionStatus("succes");
+        }else{
+            transactionStatus("fail");
+        }
     });
 
 }
@@ -79,7 +86,7 @@ function addRole(){
     }
 
     $.ajax({
-        url: "http://localhost:8028/person/"+ personId,
+        url: "http://localhost:8028/roleschool/"+ personId,
         type: "PUT",
         dataType: "json",
         data: data
@@ -91,7 +98,7 @@ function delRole(){
     var roleName = $("#roles :selected").attr("id");
 
     $.ajax({
-        url: "http://localhost:8028/person/"+id,
+        url: "http://localhost:8028/roleschool/"+id,
         type: "DELETE",
         dataType: "json",
         data: "{roleName: "+roleName+"}"

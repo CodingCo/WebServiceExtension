@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 
+    <script src="javascript/transaction.js"></script>
     <script type="text/javascript" src="javascript/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
 
@@ -24,23 +25,28 @@
     <div class="row">
         <div class="col-md-8">
             <div class="well">Server log</div>
-            <ul class="list-group">
+            <ul class="list-group" id="logmessages">
                 <li class="list-group-item">hej</li>
             </ul>
         </div>
         <div class="col-md-4">
             <div class="well">online users</div>
-            <ul class="list-group">
-                <li class="list-group-item">hej</li>
+            <ul class="list-group" id="users">
+
             </ul>
         </div>
     </div>
 </div>
-<div class="container">
-    <footer>
-        <p>this website is made by G5 - viewed best in desktop browser</p>
-    </footer>
-</div>
 
+<script>
+    getOnlineUsers();
+</script>
+<!-- FOOTER-->
+<div id="bottom-footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bottom-footer").load("footer.html");
+    });
+</script>
 </body>
 </html>
