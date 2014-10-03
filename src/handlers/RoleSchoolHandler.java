@@ -19,17 +19,14 @@ import webinterfaces.FacadeInterface;
  */
 public class RoleSchoolHandler implements HttpHandler{
 
+    Gson trans;
     FacadeInterface facade;
     ServerResponse sr;
-    GsonBuilder gsonBuilder;
-    Gson trans;
     
-    public RoleSchoolHandler(){
-        sr = new ServerResponse();
-        gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
-        trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
-        facade = new PersonFacade(trans);
+    public RoleSchoolHandler(Gson trans, FacadeInterface facade, ServerResponse sr){
+        this.trans = trans;
+        this.facade = facade;
+        this.sr = sr;
     }
 
     @Override
@@ -72,7 +69,6 @@ public class RoleSchoolHandler implements HttpHandler{
                     int lastIndex = path.lastIndexOf("/");
                     
                     if(lastIndex > 0){
-                        System.err.println("INSIDE DELETE ROLENAME");
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
                         RoleSchool r = facade.deleteRoleSchool(id, jsonInput);
                         response = trans.toJson(r);

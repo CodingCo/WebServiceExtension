@@ -23,7 +23,6 @@ function showRole(person){
     var roles = person.roles;
     var options = "";
 
-
     roles.forEach(function(role){
 
         if(role.roleName === "Student") {
@@ -102,6 +101,8 @@ function delRole(){
         dataType: "json",
         data: "{roleName: "+roleName+"}"
     }).done(showAllPersons());
+
+
 }
 
 function updatePerson(){
@@ -119,6 +120,7 @@ function updatePerson(){
 function showAllPersons (){
     $.ajax({
         url:"http://localhost:8028/person",
+        type: "GET",
         dataType: 'json'
 
     }).done(function(persons){
@@ -130,7 +132,16 @@ function showAllPersons (){
 
         });
         $("#persons").html(options);
-
+        clearFields();
     });
 
+}
+
+function clearFields(){
+    $("#fName").val("");
+    $("#lName").val("");
+    $("#phone").val("");
+    $("#mail").val("");
+    $("#semDeg").val("");
+    $("#roles").html("");
 }
