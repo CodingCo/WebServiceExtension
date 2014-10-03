@@ -84,6 +84,18 @@ function addRole(){
     }).done( showAllPersons());
 }
 
+function delRole(){
+
+    var roleName = $("#roles :selected").attr("id");
+
+    $.ajax({
+        url: "http://localhost:8028/person",
+        type: "DELETE",
+        dataType: "json",
+        data: "{roleName: "+roleName+"}"
+    }).done(showAllPersons());
+}
+
 function updatePerson(){
     var personId = $("#persons :selected").attr("id");
     var data = "{ firstName: " + $("#fName").val() + ", lastName: " + $("#lName").val() +
