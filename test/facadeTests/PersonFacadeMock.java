@@ -77,4 +77,9 @@ public class PersonFacadeMock implements FacadeInterface {
         return null;
     }
 
+    @Override
+    public Person editPerson(String json, long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

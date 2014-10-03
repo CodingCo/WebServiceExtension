@@ -81,9 +81,9 @@ public class PersonFacadeDB implements FacadeInterface {
     }
 
     private EntityManager createEntityManager() {
-
+        // testDbPU
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSideTestPU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDbPU");
             EntityManager emToReturn = emf.createEntityManager();
             return emToReturn;
         } catch (PersistenceException e) {
@@ -91,5 +91,10 @@ public class PersonFacadeDB implements FacadeInterface {
         }
 
         return null;
+    }
+
+    @Override
+    public Person editPerson(String json, long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

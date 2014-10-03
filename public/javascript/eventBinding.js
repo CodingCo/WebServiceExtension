@@ -12,5 +12,6 @@ function bindEvents(){
         }
         showPerson(id);
     });
+    $("#btn_save").bind("click", updatePerson);
 
 }

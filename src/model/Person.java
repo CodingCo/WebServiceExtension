@@ -86,6 +86,15 @@ public class Person implements Serializable {
         }
         return null;
     }
+    
+    public Collection<RoleSchool> getRoles(){
+        return this.roles;
+    }
+    
+    public void replaceRoles(ArrayList<RoleSchool> roles){
+        for(RoleSchool role : roles)
+            addRole(role);
+    }
 
     public String getFirstName() {
         return firstName;
