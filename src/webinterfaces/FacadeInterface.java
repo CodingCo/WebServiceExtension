@@ -20,5 +20,7 @@ public interface FacadeInterface {
     public Person delete(long id);
     
     public Person editPerson(String json, long id);
+    
+    public RoleSchool deleteRoleSchool(long id, String roleName);
 
 }

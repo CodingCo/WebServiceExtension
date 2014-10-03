@@ -75,14 +75,25 @@ public class PersonHandler implements HttpHandler {
 
             case "DELETE":
                 try {
+                    InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
+                    BufferedReader br = new BufferedReader(isr);
+                    String jsonInput = br.readLine();
+                    
                     String path = he.getRequestURI().getPath();
                     int lastIndex = path.lastIndexOf("/");
-                    if (lastIndex > 0) {
+                    if (lastIndex > 0 && jsonInput.contains("person")) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
                         Person p = facade.delete(id);
                         response = trans.toJson(p);
                         status = 200;
-                    } else {
+                    } else if(lastIndex > 0 && jsonInput.contains("roleName")){
+                        System.err.println("INSIDE DELETE ROLENAME");
+                        int id = Integer.parseInt(path.substring(lastIndex + 1));
+                        RoleSchool r = facade.deleteRoleSchool(id, jsonInput);
+                        response = trans.toJson(r);
+                        status = 200;
+                        
+                    } else{
                         status = 400;
                         response = "no id";
                     }
@@ -105,10 +116,12 @@ public class PersonHandler implements HttpHandler {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
                         RoleSchool r = facade.addRoleSchool(jsonInput, id);
                         response = trans.toJson(r);
+                        status = 200;
                     } else if(lastIndex > 0 && jsonInput.contains("firstName")){
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
                         Person editedPerson = facade.editPerson(jsonInput, id);
                         response = trans.toJson(editedPerson);
+                        status = 200;
                     }else {
                         status = 400;
                         response = "no id";
