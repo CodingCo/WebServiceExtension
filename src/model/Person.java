@@ -84,6 +84,7 @@ public class Person implements Serializable {
             if (roleName.equals(role.getRoleName())) {
                 temp = role;
                 roles.remove(role);
+                break;
             }
         }
         return temp;

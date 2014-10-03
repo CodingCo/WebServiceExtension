@@ -57,7 +57,9 @@ function deletePerson(){
     var id = $("#persons :selected").attr("id");
     $.ajax({
         url: "http://localhost:8028/person/"+ id,
-        type: "DELETE"
+        type: "DELETE",
+        dataType: "json",
+        data: "{ data: person }"
     }).done(showAllPersons());
 }
 
