@@ -32,23 +32,30 @@ public class AdminHandler implements HttpHandler {
 
         if (resource.equals("online")) {
             String onlineUsers = handler.getUsers();
-            String json = "[";
-            contentType = "application/json";
-            for (String user : onlineUsers.split(",")) {
-                json += "{ name: ";
-                json += user;
-                json += "},";
+
+            if (!onlineUsers.isEmpty()) {
+                String json = "[";
+                contentType = "application/json";
+                for (String user : onlineUsers.split(",")) {
+                    json += "{ \"name\": \"";
+                    json += user;
+                    json += "\"},";
+                    System.out.println("hej");
+                }
+                json = json.substring(0, json.length() - 1);
+                json += "]";
+                br.append(json);
+            }else{
+                br.append("nousers");
             }
-            json = json.substring(0, json.length() - 1);
-            json += "]";
-            br.append(json);
+
         }
-       
+
         if (resource.equals("log")) {
             File logFile = new File(contentFolder + "serverlog0.txt");
             BufferedReader input = new BufferedReader(new FileReader(logFile));
             contentType = "text/plain";
-            
+
             String line;
             while ((line = input.readLine()) != null) {
                 br.append("<li class=\"list-group-item\">");
@@ -57,11 +64,11 @@ public class AdminHandler implements HttpHandler {
             }
         }
 
-        String log = br.toString();
+        String res = br.toString();
         Headers h = he.getResponseHeaders();
         h.add("Content-Type", "text/html");
         h.add("charset", "UTF-8");
-        response.send(he, 200, log.getBytes());
+        response.send(he, 200, res.getBytes());
     }
 
 }

@@ -35,18 +35,20 @@ function getAcademies() {
 
 function getOnlineUsers(){
     $.get("http://localhost:8028/log/online", function(json){
-        var users = json;
-        var allUsers = "";
         var isJson =  IsJsonString(json);
+		if(isJson){
+			var users = JSON.parse(json);
+	        var allUsers = "";
+        }
         if(!isJson){
             $("#users").html('<li class="list-group-item list-group-item-danger">No users online</li>');
         }else{
-            users.forEach(function(user){
-                allUsers += '<li class="list-group-item list-group-item-success">'+ user.name +'</li>';
-            });
+			for(var i = 0; i < users.length; ++i){
+				allUsers += '<li class="list-group-item list-group-item-success">'+ users[i].name +'</li>';	
+			}
+			$("#users").html(allUsers);
         }
     });
-
 }
 
 function IsJsonString(str) {
@@ -60,7 +62,6 @@ function IsJsonString(str) {
 
 function getLogMessages(){
     $.get("http://localhost:8028/log/log", function(text){
-        console.log(text);
         $("#logmessages").html(text);
 
     });
