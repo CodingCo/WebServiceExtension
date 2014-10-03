@@ -85,11 +85,11 @@ function addRole(){
 }
 
 function delRole(){
-
+    var id = $("#persons :selected").attr("id");
     var roleName = $("#roles :selected").attr("id");
 
     $.ajax({
-        url: "http://localhost:8028/person",
+        url: "http://localhost:8028/person/"+id,
         type: "DELETE",
         dataType: "json",
         data: "{roleName: "+roleName+"}"
