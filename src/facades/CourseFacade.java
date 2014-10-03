@@ -1,12 +1,17 @@
 package facades;
 
 import com.google.gson.Gson;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
+import model.AssistentTeacher;
 import model.Course;
 import model.RoleSchool;
+import model.Student;
+import model.Teacher;
 import webinterfaces.CourseInterface;
 
 /**
@@ -25,27 +30,56 @@ public class CourseFacade implements CourseInterface {
 
     @Override
     public String getCourse(long id) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	Query query = em.createQuery("SELECT c FROM Course c WHERE c.id = ?1").setParameter(1, id);
+        Course co = (Course) query.getSingleResult();
+        return transaction.toJson(co);
     }
 
     @Override
     public String getAllCourses() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	List<Course> result = em.createQuery("SELECT c FROM Course c").getResultList();
+        return transaction.toJson(result);
     }
 
     @Override
     public Course addCourse(String json) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	Course co = transaction.fromJson(json, Course.class);
+        em.getTransaction().begin();
+        em.persist(co);
+        em.getTransaction().commit();
+        return co;
     }
 
     @Override
     public Course deleteCourse(long id) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	em.getTransaction().begin();
+        Course co = em.find(Course.class, id);
+        em.remove(co);
+        em.getTransaction().commit();
+        return co;
     }
 
     @Override
     public RoleSchool addRoleSchoolToCourse(String json, long id) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	RoleSchool role = null;
+        if (json.contains("Teacher")) {
+            role = transaction.fromJson(json, Teacher.class);
+        }
+        if (json.contains("Student")) {
+            role = transaction.fromJson(json, Student.class);
+        }
+        if (json.contains("AssistentTeacher")) {
+            role = transaction.fromJson(json, AssistentTeacher.class);
+        }
+	
+	em.getTransaction().begin();
+        Course co = em.find(Course.class, id);
+        if (co != null && role != null) {
+            co.addRole(role);
+        }
+        em.getTransaction().commit();
+
+        return role;
     }
 
     private EntityManager createEntityManager() {

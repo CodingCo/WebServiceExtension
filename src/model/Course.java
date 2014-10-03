@@ -68,4 +68,7 @@ public class Course implements Serializable {
     }
 
     // adders removers
+    public void addRole(RoleSchool rs){
+	roles.add(rs);
+    }
 }
