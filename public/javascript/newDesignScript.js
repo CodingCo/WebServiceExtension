@@ -6,7 +6,6 @@ $(document).ready(function(){
     showAllPersons();
     getAcademies();
     bindEvents();
-    transactionStatus("succes");
 });
 
 function showPerson (id){
