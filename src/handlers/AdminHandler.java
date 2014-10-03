@@ -28,12 +28,11 @@ public class AdminHandler implements HttpHandler {
         String resource = he.getRequestURI().getPath().substring(5);
         StringBuilder br = new StringBuilder();
 
-        String contentType;
+        String contentType = "";
 
         if (resource.equals("online")) {
             String onlineUsers = handler.getUsers();
             String json = "[";
-            System.out.println(onlineUsers);
             contentType = "application/json";
             for (String user : onlineUsers.split(",")) {
                 json += "{ name: ";
@@ -48,7 +47,8 @@ public class AdminHandler implements HttpHandler {
         if (resource.equals("log")) {
             File logFile = new File(contentFolder + "serverlog0.txt");
             BufferedReader input = new BufferedReader(new FileReader(logFile));
-
+            contentType = "text/plain";
+            
             String line;
             while ((line = input.readLine()) != null) {
                 br.append("<li class=\"list-group-item\">");

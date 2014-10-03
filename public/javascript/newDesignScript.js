@@ -4,7 +4,9 @@
 
 $(document).ready(function(){
     showAllPersons();
+    getAcademies();
     bindEvents();
+    transactionStatus("succes");
 });
 
 function showPerson (id){
@@ -47,8 +49,13 @@ function addPerson(){
         url: "http://localhost:8028/person",
         type: "POST",
         data: data
-    }).done(function(){
-        showAllPersons()
+    }).done(function(user){
+        showAllPersons();
+        if(user != null){
+            transactionStatus("succes");
+        }else{
+            transactionStatus("fail");
+        }
     });
 
 }
