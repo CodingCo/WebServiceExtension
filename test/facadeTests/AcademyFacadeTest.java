@@ -28,7 +28,7 @@ public class AcademyFacadeTest {
     @BeforeClass
     public static void setUpClass() {
         // true to test againt mock -- false to test up againt test DB
-        boolean mockOrNot = true;
+        boolean mockOrNot = false;
         if (mockOrNot) {
             amock = new AcademyFacadeMock();
         } else {

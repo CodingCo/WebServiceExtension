@@ -8,6 +8,8 @@ $(document).ready(function(){
     bindEvents();
 });
 
+var index;
+
 function showPerson (id){
     $.get("http://localhost:8028/person/"+id, function(person){
         $("#fName").val(person.firstName);
@@ -42,7 +44,6 @@ function showRole(person){
 function addPerson(){
     var data = "{ firstName: " + $("#fName").val() + ", lastName: " + $("#lName").val() +
         ", mail: " + $("#mail").val() + ", phone: " + $("#phone").val()+ "}";
-    var index = $("#persons")[0].selectedIndex;
     $.ajax({
         url: "http://localhost:8028/person",
         type: "POST",
@@ -60,20 +61,20 @@ function addPerson(){
 
 function deletePerson(){
     var id = $("#persons :selected").attr("id");
-    var index = $("#persons")[0].selectedIndex;
     $.ajax({
         url: "http://localhost:8028/person/"+ id,
         type: "DELETE",
         dataType: "json",
         data: "{ data: person }"
     }).done(showAllPersons(index));
+
+
 }
 
 function addRole(){
 
     var roleName = $("#rolesDropDown :selected").text();
     var personId = $("#persons :selected").attr("id");
-    var index = $("#persons")[0].selectedIndex;
     var degSem = $("#semDeg").val();
     var data = "";
 
@@ -92,12 +93,10 @@ function addRole(){
         data: data
     }).done(showAllPersons(index));
 
-
 }
 
 function delRole(){
     var personId = $("#persons :selected").attr("id");
-    var index = $("#persons")[0].selectedIndex;
     var roleName = $("#roles :selected").attr("id");
 
     $.ajax({
@@ -112,7 +111,6 @@ function delRole(){
 
 function updatePerson(){
     var personId = $("#persons :selected").attr("id");
-    var index = $("#persons")[0].selectedIndex;
     var data = "{ firstName: " + $("#fName").val() + ", lastName: " + $("#lName").val() +
         ", mail: " + $("#mail").val() + ", phone: " + $("#phone").val()+ "}";
     $.ajax({
@@ -124,6 +122,8 @@ function updatePerson(){
 }
 
 function showAllPersons (index){
+    index = $("#persons")[0].selectedIndex;
+
     $.ajax({
         url:"http://localhost:8028/person",
         type: "GET",
@@ -138,6 +138,10 @@ function showAllPersons (index){
 
         });
         $("#persons").html(options);
+
+        if( $("#persons").has("option").length === 0 ) {
+            clearFields();
+        }
 
         $("#persons option")[index].selected = true;
         var personId = $("#persons :selected").attr("id");
