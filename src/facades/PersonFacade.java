@@ -4,7 +4,6 @@ import model.Person;
 import model.RoleSchool;
 import webinterfaces.FacadeInterface;
 import com.google.gson.Gson;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import model.AssistentTeacher;
@@ -17,12 +16,14 @@ import model.Teacher;
  */
 public class PersonFacade implements FacadeInterface {
 
-    Gson trans;
-    EntityManager em;
+    private Gson trans;
+    private EntityManager em;
+    private Factory fac;
 
     public PersonFacade(Gson trans) {
+        this.fac = Factory.getInstance();
         this.trans = trans;
-        this.em = createEntityManager();
+        this.em = fac.getManager();
     }
 
     @Override
@@ -79,24 +80,8 @@ public class PersonFacade implements FacadeInterface {
         return person;
     }
 
-    private EntityManager createEntityManager() {
-
-        try {
-
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSidePU");
-            EntityManager emToReturn = emf.createEntityManager();
-            return emToReturn;
-
-        } catch (PersistenceException e) {
-            System.err.println("Problem finding Persitence Unit!");
-        }
-
-        return null;
-
-    }
-    
     @Override
-    public Person editPerson(String json, long id){
+    public Person editPerson(String json, long id) {
         Person editedPerson = trans.fromJson(json, Person.class);
         Person personToEdit = em.find(Person.class, id);
         em.getTransaction().begin();
@@ -111,8 +96,8 @@ public class PersonFacade implements FacadeInterface {
     @Override
     public RoleSchool deleteRoleSchool(long id, String roleName) {
         String[] roleNameSplit = roleName.split(":");
-        String role = roleNameSplit[1].substring(0, roleNameSplit[1].length()-1).trim();
-        
+        String role = roleNameSplit[1].substring(0, roleNameSplit[1].length() - 1).trim();
+
         em.getTransaction().begin();
         Person person = em.find(Person.class, id);
         RoleSchool deletedRole = person.removeRole(role);

@@ -3,8 +3,6 @@ package facades;
 import com.google.gson.Gson;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import model.BusinessAcademy;
 import webinterfaces.AcademyFacadeInterface;
 
@@ -14,12 +12,12 @@ import webinterfaces.AcademyFacadeInterface;
  */
 public class AcademyFacade implements AcademyFacadeInterface {
 
-    EntityManagerFactory emf;
+    Factory fac;
     EntityManager em;
 
     public AcademyFacade() {
-        emf = Persistence.createEntityManagerFactory("ServerSidePU");
-        em = emf.createEntityManager();
+        this.fac = Factory.getInstance();
+        this.em = fac.getManager();
     }
 
     @Override
