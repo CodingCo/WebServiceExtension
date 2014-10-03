@@ -57,7 +57,9 @@ function deletePerson(){
     var id = $("#persons :selected").attr("id");
     $.ajax({
         url: "http://localhost:8028/person/"+ id,
-        type: "DELETE"
+        type: "DELETE",
+        dataType: "json",
+        data: "{ data: person }"
     }).done(showAllPersons());
 }
 
@@ -82,6 +84,18 @@ function addRole(){
         dataType: "json",
         data: data
     }).done( showAllPersons());
+}
+
+function delRole(){
+    var id = $("#persons :selected").attr("id");
+    var roleName = $("#roles :selected").attr("id");
+
+    $.ajax({
+        url: "http://localhost:8028/person/"+id,
+        type: "DELETE",
+        dataType: "json",
+        data: "{roleName: "+roleName+"}"
+    }).done(showAllPersons());
 }
 
 function updatePerson(){

@@ -27,7 +27,7 @@ public class Person implements Serializable {
     @SequenceGenerator(name = "personIdGen", sequenceName = "PERSON_SEQ", initialValue = 100000, allocationSize = 1)
     @Expose
     private Long id;
-    
+
     @Expose
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -78,6 +78,18 @@ public class Person implements Serializable {
         }
     }
 
+    public RoleSchool removeRole(String roleName) {
+        RoleSchool temp = null;
+        for (RoleSchool role : roles) {
+            if (roleName.equals(role.getRoleName())) {
+                temp = role;
+                roles.remove(role);
+                break;
+            }
+        }
+        return temp;
+    }
+
     public RoleSchool getRole(int roleId) {
         for (RoleSchool role : roles) {
             if (role.getId() == roleId) {
@@ -86,14 +98,15 @@ public class Person implements Serializable {
         }
         return null;
     }
-    
-    public Collection<RoleSchool> getRoles(){
+
+    public Collection<RoleSchool> getRoles() {
         return this.roles;
     }
-    
-    public void replaceRoles(ArrayList<RoleSchool> roles){
-        for(RoleSchool role : roles)
+
+    public void replaceRoles(ArrayList<RoleSchool> roles) {
+        for (RoleSchool role : roles) {
             addRole(role);
+        }
     }
 
     public String getFirstName() {
@@ -132,7 +145,5 @@ public class Person implements Serializable {
     public String toString() {
         return "Person{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", roles=" + roles + ", mail=" + mail + ", phone=" + phone + '}';
     }
-
-    
 
 }

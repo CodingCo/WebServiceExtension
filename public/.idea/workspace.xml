@@ -26,8 +26,8 @@
       <file leaf-file-name="loadAllPersons.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/loadAllPersons.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2883895" vertical-offset="654" max-vertical-offset="1695">
-              <caret line="59" column="78" selection-start-line="59" selection-start-column="78" selection-end-line="59" selection-end-column="78" />
+            <state vertical-scroll-proportion="0.23272215" vertical-offset="765" max-vertical-offset="1695">
+              <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -36,8 +36,8 @@
       <file leaf-file-name="newDesignScript.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascript/newDesignScript.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1815">
-              <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="2025">
+              <caret line="61" column="31" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -46,8 +46,8 @@
       <file leaf-file-name="eventBinding.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascript/eventBinding.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
-              <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="345">
+              <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -77,8 +77,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="808" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -106,6 +107,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -140,14 +142,13 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="LayoutCode.rearrangeEntriesHTML" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="FullScreen" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="appearance" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -217,8 +218,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="22" width="1440" height="808" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -259,11 +260,34 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/loadAllPersons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="654" max-vertical-offset="1695">
+          <caret line="59" column="78" selection-start-line="59" selection-start-column="78" selection-end-line="59" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascript/newDesignScript.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="1815">
+          <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascript/eventBinding.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="330">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/adminpage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="780">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -279,7 +303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="225">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -303,7 +326,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="225">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -319,7 +341,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="225">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -335,15 +356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="225">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/javascript/eventBinding.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
-          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -357,18 +369,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/javascript/eventBinding.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="345">
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/javascript/newDesignScript.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1815">
-          <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="2025">
+          <caret line="61" column="31" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/loadAllPersons.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2883895" vertical-offset="654" max-vertical-offset="1695">
-          <caret line="59" column="78" selection-start-line="59" selection-start-column="78" selection-end-line="59" selection-end-column="78" />
+        <state vertical-scroll-proportion="0.23272215" vertical-offset="765" max-vertical-offset="1695">
+          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
           <folding />
         </state>
       </provider>

@@ -83,7 +83,7 @@ public class PersonFacade implements FacadeInterface {
 
         try {
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("conPU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSidePU");
             EntityManager emToReturn = emf.createEntityManager();
             return emToReturn;
 
@@ -106,6 +106,18 @@ public class PersonFacade implements FacadeInterface {
         personToEdit.setMail(editedPerson.getMail());
         em.getTransaction().commit();
         return personToEdit;
+    }
+
+    @Override
+    public RoleSchool deleteRoleSchool(long id, String roleName) {
+        String[] roleNameSplit = roleName.split(":");
+        String role = roleNameSplit[1].substring(0, roleNameSplit[1].length()-1).trim();
+        
+        em.getTransaction().begin();
+        Person person = em.find(Person.class, id);
+        RoleSchool deletedRole = person.removeRole(role);
+        em.getTransaction().commit();
+        return deletedRole;
     }
 
 }
