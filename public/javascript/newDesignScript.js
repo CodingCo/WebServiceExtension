@@ -23,7 +23,6 @@ function showRole(person){
 
     var roles = person.roles;
     var options = "";
-    alert(roles);
 
     roles.forEach(function(role){
 
@@ -103,6 +102,8 @@ function delRole(){
         dataType: "json",
         data: "{roleName: "+roleName+"}"
     }).done(showAllPersons());
+
+
 }
 
 function updatePerson(){
@@ -132,7 +133,16 @@ function showAllPersons (){
 
         });
         $("#persons").html(options);
-
+        clearFields();
     });
 
+}
+
+function clearFields(){
+    $("#fName").val("");
+    $("#lName").val("");
+    $("#phone").val("");
+    $("#mail").val("");
+    $("#semDeg").val("");
+    $("#roles").html("");
 }
