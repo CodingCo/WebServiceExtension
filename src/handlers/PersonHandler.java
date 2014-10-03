@@ -19,19 +19,17 @@ import webinterfaces.FacadeInterface;
  */
 public class PersonHandler implements HttpHandler {
 
-    private final FacadeInterface facade;
-    private final ServerResponse sr;
-    private final GsonBuilder gsonBuilder;
-    private final Gson trans;
+    Gson trans;
+    FacadeInterface facade;
+    ServerResponse sr;
+    
     private String response;
     private int status;
 
-    public PersonHandler() {
-        sr = new ServerResponse();
-        gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
-        trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
-        facade = new PersonFacade(trans);
+    public PersonHandler(Gson trans, FacadeInterface facade, ServerResponse sr) {
+        this.trans = trans;
+        this.facade = facade;
+        this.sr = sr;
     }
 
     @Override

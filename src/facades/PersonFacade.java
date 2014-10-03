@@ -34,8 +34,7 @@ public class PersonFacade implements FacadeInterface {
 
     @Override
     public String getOnePersonAsJson(long id) {
-        Query query = em.createQuery("SELECT p FROM Person p WHERE p.id = ?1").setParameter(1, id);
-        Person person = (Person) query.getSingleResult();
+        Person person = em.find(Person.class, id);
         return trans.toJson(person);
     }
 
@@ -67,7 +66,6 @@ public class PersonFacade implements FacadeInterface {
             person.addRole(role);
         }
         em.getTransaction().commit();
-
         return role;
     }
 

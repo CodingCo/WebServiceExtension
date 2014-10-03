@@ -21,7 +21,7 @@ function showRole(person){
 
     var roles = person.roles;
     var options = "";
-
+    alert(roles);
 
     roles.forEach(function(role){
 
@@ -79,7 +79,7 @@ function addRole(){
     }
 
     $.ajax({
-        url: "http://localhost:8028/person/"+ personId,
+        url: "http://localhost:8028/roleschool/"+ personId,
         type: "PUT",
         dataType: "json",
         data: data
@@ -91,7 +91,7 @@ function delRole(){
     var roleName = $("#roles :selected").attr("id");
 
     $.ajax({
-        url: "http://localhost:8028/person/"+id,
+        url: "http://localhost:8028/roleschool/"+id,
         type: "DELETE",
         dataType: "json",
         data: "{roleName: "+roleName+"}"
@@ -113,6 +113,7 @@ function updatePerson(){
 function showAllPersons (){
     $.ajax({
         url:"http://localhost:8028/person",
+        type: "GET",
         dataType: 'json'
 
     }).done(function(persons){
