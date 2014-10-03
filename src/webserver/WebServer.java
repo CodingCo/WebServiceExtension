@@ -1,6 +1,7 @@
 package webserver;
 
 import com.sun.net.httpserver.HttpServer;
+import handlers.AcademyHandler;
 import handlers.AdminHandler;
 import handlers.PersonHandler;
 import handlers.ServerFileHandler;
@@ -33,6 +34,7 @@ public class WebServer {
         server.createContext("/", new ServerFileHandler());
         server.createContext("/log", new AdminHandler(handler));
         server.createContext("/person", new PersonHandler());
+        server.createContext("/academy", new AcademyHandler());
         server.setExecutor(null);
         server.start();
         System.out.println("Server started, listening on port: " + port);
