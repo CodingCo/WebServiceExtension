@@ -42,13 +42,13 @@ function showRole(person){
 function addPerson(){
     var data = "{ firstName: " + $("#fName").val() + ", lastName: " + $("#lName").val() +
         ", mail: " + $("#mail").val() + ", phone: " + $("#phone").val()+ "}";
-
+    var index = $("#persons")[0].selectedIndex;
     $.ajax({
         url: "http://localhost:8028/person",
         type: "POST",
         data: data
     }).done(function(user){
-        showAllPersons();
+        showAllPersons(index);
         if(user != null){
             transactionStatus("succes");
         }else{
@@ -60,18 +60,20 @@ function addPerson(){
 
 function deletePerson(){
     var id = $("#persons :selected").attr("id");
+    var index = $("#persons")[0].selectedIndex;
     $.ajax({
         url: "http://localhost:8028/person/"+ id,
         type: "DELETE",
         dataType: "json",
         data: "{ data: person }"
-    }).done(showAllPersons());
+    }).done(showAllPersons(index));
 }
 
 function addRole(){
 
     var roleName = $("#rolesDropDown :selected").text();
     var personId = $("#persons :selected").attr("id");
+    var index = $("#persons")[0].selectedIndex;
     var degSem = $("#semDeg").val();
     var data = "";
 
@@ -88,25 +90,29 @@ function addRole(){
         type: "PUT",
         dataType: "json",
         data: data
-    }).done( showAllPersons());
+    }).done(showAllPersons(index));
+
+
 }
 
 function delRole(){
-    var id = $("#persons :selected").attr("id");
+    var personId = $("#persons :selected").attr("id");
+    var index = $("#persons")[0].selectedIndex;
     var roleName = $("#roles :selected").attr("id");
 
     $.ajax({
-        url: "http://localhost:8028/roleschool/"+id,
+        url: "http://localhost:8028/roleschool/"+personId,
         type: "DELETE",
         dataType: "json",
         data: "{roleName: "+roleName+"}"
-    }).done(showAllPersons());
+    }).done(showAllPersons(index));
 
 
 }
 
 function updatePerson(){
     var personId = $("#persons :selected").attr("id");
+    var index = $("#persons")[0].selectedIndex;
     var data = "{ firstName: " + $("#fName").val() + ", lastName: " + $("#lName").val() +
         ", mail: " + $("#mail").val() + ", phone: " + $("#phone").val()+ "}";
     $.ajax({
@@ -114,10 +120,10 @@ function updatePerson(){
         type: "PUT",
         dataType: "json",
         data: data
-    }).done( showAllPersons());
+    }).done( showAllPersons(index));
 }
 
-function showAllPersons (){
+function showAllPersons (index){
     $.ajax({
         url:"http://localhost:8028/person",
         type: "GET",
@@ -132,7 +138,10 @@ function showAllPersons (){
 
         });
         $("#persons").html(options);
-        clearFields();
+
+        $("#persons option")[index].selected = true;
+        var personId = $("#persons :selected").attr("id");
+        showPerson(personId);
     });
 
 }
@@ -144,4 +153,5 @@ function clearFields(){
     $("#mail").val("");
     $("#semDeg").val("");
     $("#roles").html("");
+
 }
