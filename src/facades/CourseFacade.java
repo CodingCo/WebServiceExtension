@@ -3,9 +3,6 @@ package facades;
 import com.google.gson.Gson;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import model.AssistentTeacher;
 import model.Course;
@@ -22,10 +19,12 @@ public class CourseFacade implements CourseInterface {
 
     Gson transaction;
     EntityManager em;
+    Factory fac;
 
     public CourseFacade(Gson transaction) {
 	this.transaction = transaction;
-	this.em = createEntityManager();
+	this.fac = Factory.getInstance();
+	this.em = fac.getManager();
     }
 
     @Override
@@ -81,16 +80,4 @@ public class CourseFacade implements CourseInterface {
 
         return role;
     }
-
-    private EntityManager createEntityManager() {
-	try {
-	    EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSidePU");
-	    EntityManager emToReturn = emf.createEntityManager();
-	    return emToReturn;
-	} catch (PersistenceException e) {
-	    System.err.println("Problem finding Persistence Unit!");
-	}
-	return null;
-    }
-
 }
