@@ -32,11 +32,13 @@ function getAcademies() {
 }
 
 
+
 function getOnlineUsers(){
     $.get("http://localhost:8028/log/online", function(json){
         var users = json;
         var allUsers = "";
-        if(users.length === 0){
+        var isJson =  IsJsonString(json);
+        if(!isJson){
             $("#users").html('<li class="list-group-item list-group-item-danger">No users online</li>');
         }else{
             users.forEach(function(user){
@@ -44,12 +46,23 @@ function getOnlineUsers(){
             });
         }
     });
+
 }
 
-function getOnlineUsers(){
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+function getLogMessages(){
     $.get("http://localhost:8028/log/log", function(text){
         console.log(text);
         $("#logmessages").html(text);
+
     });
 }
 
