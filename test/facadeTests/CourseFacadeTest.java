@@ -56,8 +56,7 @@ public class CourseFacadeTest {
         instance.addCourse(c1AsJson);
         Course fetchedCourse = transaction.fromJson(instance.getCourse(100000), Course.class);
 
-        if (fetchedCourse.getId() == 100000 && c1.getName().equals(fetchedCourse.getName())
-                && c1.getDescription().equals(fetchedCourse.getDescription())) {
+        if (c1.getName().equals(fetchedCourse.getName()) && c1.getDescription().equals(fetchedCourse.getDescription())) {
             assertTrue(true);
         } else {
             assertTrue(false);
