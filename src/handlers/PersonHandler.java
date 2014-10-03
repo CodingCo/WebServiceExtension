@@ -19,11 +19,13 @@ import webinterfaces.FacadeInterface;
  */
 public class PersonHandler implements HttpHandler {
 
-    FacadeInterface facade;
-    ServerResponse sr;
-    GsonBuilder gsonBuilder;
-    Gson trans;
-    
+    private final FacadeInterface facade;
+    private final ServerResponse sr;
+    private final GsonBuilder gsonBuilder;
+    private final Gson trans;
+    private String response;
+    private int status;
+
     public PersonHandler() {
         sr = new ServerResponse();
         gsonBuilder = new GsonBuilder();
@@ -36,107 +38,111 @@ public class PersonHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
 
         String method = he.getRequestMethod().toUpperCase();
-        String response = "";
-        int status = 0;
+        response = "";
+        status = 0;
+        
         switch (method) {
-
             case "GET":
-                try {
-                    String path = he.getRequestURI().getPath();
-                    int lastIndex = path.lastIndexOf("/");
-                    if (lastIndex > 0) {
-                        int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        response = facade.getOnePersonAsJson(id);
-                        status = 200;
-                    } else {
-                        response = facade.getPersonsAsJSON();
-                        status = 200;
-                    }
-                } catch (NumberFormatException nfe) {
-                    response = "id is not a number";
-                    status = 404;
-                }
+                getRequest(he);
                 break;
 
             case "POST":
-                try {
-                    InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
-                    BufferedReader br = new BufferedReader(isr);
-                    String jsonInput = br.readLine();
-
-                    Person p = facade.addPersonFromGson(jsonInput);
-                    response = trans.toJson(p);
-
-                } catch (IllegalArgumentException e) {
-                    status = 400;
-                    response = e.getMessage();
-                }
+                postRequest(he);
                 break;
 
             case "DELETE":
-                try {
-                    InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
-                    BufferedReader br = new BufferedReader(isr);
-                    String jsonInput = br.readLine();
-                    
-                    String path = he.getRequestURI().getPath();
-                    int lastIndex = path.lastIndexOf("/");
-                    if (lastIndex > 0 && jsonInput.contains("person")) {
-                        int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        Person p = facade.delete(id);
-                        response = trans.toJson(p);
-                        status = 200;
-                    } else if(lastIndex > 0 && jsonInput.contains("roleName")){
-                        System.err.println("INSIDE DELETE ROLENAME");
-                        int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        RoleSchool r = facade.deleteRoleSchool(id, jsonInput);
-                        response = trans.toJson(r);
-                        status = 200;
-                        
-                    } else{
-                        status = 400;
-                        response = "no id";
-                    }
-                } catch (NumberFormatException nfe) {
-                    response = "id is not a number";
-                    status = 404;
-                }
+                deleteRequest(he);
                 break;
 
             case "PUT":
-                try {
-                    InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
-                    BufferedReader br = new BufferedReader(isr);
-                    String jsonInput = br.readLine();
-
-                    String path = he.getRequestURI().getPath();
-                    int lastIndex = path.lastIndexOf("/");
-                    
-                    if (lastIndex > 0 && jsonInput.contains("roleName")) {
-                        int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        RoleSchool r = facade.addRoleSchool(jsonInput, id);
-                        response = trans.toJson(r);
-                        status = 200;
-                    } else if(lastIndex > 0 && jsonInput.contains("firstName")){
-                        int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        Person editedPerson = facade.editPerson(jsonInput, id);
-                        response = trans.toJson(editedPerson);
-                        status = 200;
-                    }else {
-                        status = 400;
-                        response = "no id";
-                    }
-                } catch (NumberFormatException nfe) {
-                    response = "id is not a number";
-                    status = 404;
-                }
-
+                putRequest(he);
                 break;
         }
-
         he.getResponseHeaders().add("Content-Type", "application/json");
         sr.sendMessage(he, status, response);
+    }
 
+    private void getRequest(HttpExchange he) throws IOException {
+        try {
+            String path = he.getRequestURI().getPath();
+            int lastIndex = path.lastIndexOf("/");
+            if (lastIndex > 0) {
+                int id = Integer.parseInt(path.substring(lastIndex + 1));
+                response = facade.getOnePersonAsJson(id);
+                status = 200;
+            } else {
+                response = facade.getPersonsAsJSON();
+                status = 200;
+            }
+        } catch (NumberFormatException nfe) {
+            response = "id is not a number";
+            status = 404;
+        }
+    }
+
+    private void postRequest(HttpExchange he) throws IOException {
+
+        try {
+            InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+            String jsonInput = br.readLine();
+
+            Person p = facade.addPersonFromGson(jsonInput);
+            response = trans.toJson(p);
+
+        } catch (IllegalArgumentException e) {
+            status = 400;
+            response = e.getMessage();
+        }
+
+    }
+
+    private void deleteRequest(HttpExchange he) throws IOException {
+        try {
+            InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+            String jsonInput = br.readLine();
+
+            String path = he.getRequestURI().getPath();
+            int lastIndex = path.lastIndexOf("/");
+            if (lastIndex > 0) {
+                int id = Integer.parseInt(path.substring(lastIndex + 1));
+                Person p = facade.delete(id);
+                response = trans.toJson(p);
+                status = 200;
+            } else {
+                status = 400;
+                response = "no id";
+            }
+        } catch (NumberFormatException nfe) {
+            response = "id is not a number";
+            status = 404;
+        }
+    }
+
+    private void putRequest(HttpExchange he) throws IOException {
+
+        try {
+            InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+            String jsonInput = br.readLine();
+
+            String path = he.getRequestURI().getPath();
+            int lastIndex = path.lastIndexOf("/");
+
+            if (lastIndex > 0) {
+                int id = Integer.parseInt(path.substring(lastIndex + 1));
+                Person editedPerson = facade.editPerson(jsonInput, id);
+                response = trans.toJson(editedPerson);
+                status = 200;
+            } else {
+                status = 400;
+                response = "no id";
+            }
+        } catch (NumberFormatException nfe) {
+            response = "id is not a number";
+            status = 404;
+        }
     }
 
 }
