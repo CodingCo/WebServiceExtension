@@ -1,35 +1,30 @@
-package facades;
+package facadeTests;
 
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import model.AssistentTeacher;
 import model.Course;
+import model.Person;
 import model.RoleSchool;
-import model.Student;
-import model.Teacher;
 import webinterfaces.CourseFacadeInterface;
 
 /**
  *
- * @author kasper
+ * @author christophermortensen
  */
-public class CourseFacade implements CourseFacadeInterface {
+public class CourseFacadeMock implements CourseFacadeInterface {
 
-    Gson transaction;
-    EntityManager em;
-    Factory fac;
+    private List<Person> courses;
+    private Gson trans;
 
-    public CourseFacade(Gson transaction) {
-	this.transaction = transaction;
-	this.fac = Factory.getInstance();
-	this.em = fac.getManager();
+    public CourseFacadeMock(Gson trans) {
+        this.courses = new ArrayList<>();
+        this.trans = trans;
     }
 
     @Override
     public String getAllCoursesAsJson() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return trans.toJson(courses);
     }
 
     @Override
@@ -48,14 +43,13 @@ public class CourseFacade implements CourseFacadeInterface {
     }
 
     @Override
-    public RoleSchool assignCourseToRoleSchool(String json, long personId, String roleName) {
+    public Person assignCourseToRoleSchool(String json, long personId, String roleName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public RoleSchool removeCourseFromRoleSchool(long personId, String roleName) {
+    public Person removeCourseFromRoleSchool(long personId, String roleName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
 }

@@ -1,7 +1,7 @@
 package webinterfaces;
 
 import model.Course;
-import model.RoleSchool;
+import model.Person;
 
 /**
  *
@@ -17,7 +17,7 @@ public interface CourseFacadeInterface {
     
     public Course deleteCourse(long personId, String roleName);
     
-    public RoleSchool assignCourseToRoleSchool(String json, long personId, String roleName);
+    public Person assignCourseToRoleSchool(String json, long personId, String roleName);
     
-    public RoleSchool removeCourseFromRoleSchool(long personId, String roleName);
+    public Person removeCourseFromRoleSchool(long personId, String roleName);
 }

@@ -43,10 +43,10 @@ public class CourseHandler implements HttpHandler {
 		    int lastIndex = path.lastIndexOf("/");
 		    if (lastIndex > 0) {
 			int id = Integer.parseInt(path.substring(lastIndex + 1));
-			response = facade.getCourse(id);
+			response = facade.getOneCourseAsJson(id);
 			status = 200;
 		    } else {
-			response = facade.getAllCourses();
+			response = facade.getAllCoursesAsJson();
 			status = 200;
 		    }
 		} catch (NumberFormatException nfe) {
@@ -60,7 +60,7 @@ public class CourseHandler implements HttpHandler {
 		    BufferedReader br = new BufferedReader(isr);
 		    String jsonInput = br.readLine();
 
-		    Course co = facade.addCourse(jsonInput);
+		    Course co = facade.addCourseFromGson(jsonInput);
 		    
 		    status = 200;
 		    response = transaction.toJson(co);
@@ -75,7 +75,7 @@ public class CourseHandler implements HttpHandler {
                     int lastIndex = path.lastIndexOf("/");
                     if (lastIndex > 0) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        Course co = facade.deleteCourse(id);
+                        Course co = facade.deleteCourse(id, null);
 			
                         status = 200;
 			response = transaction.toJson(co);
