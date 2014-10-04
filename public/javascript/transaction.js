@@ -6,12 +6,15 @@
 function transactionStatus(type) {
     var succesMessage = '<div class="alert alert-success" role="alert">The transaction was a succes</div>';
     var failMessage = '<div class="alert alert-warning" role="alert">The transaction failed</div>';
+    var failRoleMessage = '<div class="alert alert-warning" role="alert">Role already exists</div>';
 
     var element = document.getElementById("transaction_status");
     if (type === "fail") {
         element.innerHTML = failMessage;
-    } else {
+    } else if (type === "succes") {
         element.innerHTML = succesMessage;
+    } else {
+        element.innerHTML = failRoleMessage;
     }
     window.setTimeout(function () {
         document.getElementById("transaction_status").innerHTML = "";

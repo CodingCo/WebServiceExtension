@@ -71,6 +71,7 @@ function deletePerson(){
 
 }
 
+
 function addRole(){
 
     var roleName = $("#rolesDropDown :selected").text();
@@ -80,19 +81,45 @@ function addRole(){
 
     if (roleName.toLowerCase() === "student") {
         data += "{semester: " + degSem + ", roleName: Student}";
-    }else if (roleName.toLowerCase() === "teacher") {
+    }
+    if (roleName.toLowerCase() === "teacher") {
         data += "{degree: " + degSem + ", roleName: Teacher}";
-    }else {
+    }
+    if (roleName.toLowerCase() === "assistent teacher") {
+        roleName = "AssistentTeacher";
         data += "{roleName: AssistentTeacher}";
     }
 
-    $.ajax({
-        url: "http://localhost:8028/roleschool/"+ personId,
-        type: "PUT",
-        dataType: "json",
-        data: data
-    }).done(showAllPersons(index));
+    if(!roleExists(roleName)){
+        $.ajax({
+            url: "http://localhost:8028/roleschool/"+ personId,
+            type: "PUT",
+            dataType: "json",
+            data: data
+        }).done(function(role){
+            if(role != null){
+                showAllPersons(index);
+                transactionStatus("succes");
+            } else{
+                transactionStatus("fail");
+            }
+        });
 
+    }
+
+
+}
+
+function roleExists(roleName){
+    var exists = false;
+
+    $("#roles > option").each(function(){
+        if(this.text.indexOf(roleName) > -1){
+            transactionStatus("roleExists");
+            exists = true;
+        }
+    });
+    return exists;
 }
 
 function delRole(){

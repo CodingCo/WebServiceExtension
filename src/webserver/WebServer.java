@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpServer;
 import facades.PersonFacade;
-import facades.RoleSchoolAdapter;
+import adapters.RoleSchoolAdapter;
 import handlers.AcademyHandler;
 import handlers.AdminHandler;
 import handlers.PersonHandler;
