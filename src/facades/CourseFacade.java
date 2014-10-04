@@ -44,19 +44,20 @@ public class CourseFacade implements CourseFacadeInterface {
     }
 
     @Override
-    public Course deleteCourse(long personId, String roleName) {
+    public Course deleteCourse(long personId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Person assignCourseToRoleSchool(String json, long personId, String roleName) {
+    public Course assignRoleSchoolToCourse(long personId, long roleId, long courseId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Person removeCourseFromRoleSchool(long personId, String roleName) {
+    public Course unassignRoleSchoolFromCourse(long personId, long roleId, long courseId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     
 

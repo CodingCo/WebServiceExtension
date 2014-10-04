@@ -2,7 +2,9 @@ package model;
 
 import com.google.gson.annotations.Expose;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,7 +38,7 @@ public class Course implements Serializable {
 
     @OneToMany
     @Expose
-    private Collection<RoleSchool> roles;
+    private List<RoleSchool> roles;
 
     public Course() {
     }
@@ -44,6 +46,7 @@ public class Course implements Serializable {
     public Course(String name, String description) {
         this.name = name;
         this.description = description;
+        roles = new ArrayList<RoleSchool>();
     }
     
     public Long getId() {
@@ -78,5 +81,18 @@ public class Course implements Serializable {
     // adders removers
     public void addRole(RoleSchool rs){
 	roles.add(rs);
+    }
+    
+    public RoleSchool removeRole(long id){
+        for(int i = 0; i < roles.size(); i++){
+            if(roles.get(i).getId() == id){
+                return roles.remove(i);
+            }
+        }
+        return null;
+    }
+    
+    public ArrayList<RoleSchool> getRoles(){
+        return (ArrayList<RoleSchool>)this.roles;
     }
 }

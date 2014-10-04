@@ -75,7 +75,7 @@ public class CourseHandler implements HttpHandler {
                     int lastIndex = path.lastIndexOf("/");
                     if (lastIndex > 0) {
                         int id = Integer.parseInt(path.substring(lastIndex + 1));
-                        Course co = facade.deleteCourse(id, null);
+                        Course co = facade.deleteCourse(id);
 			
                         status = 200;
 			response = transaction.toJson(co);

@@ -48,26 +48,64 @@ public class CourseFacadeMock implements CourseFacadeInterface {
     }
 
     @Override
-    public Course deleteCourse(long personId, String roleName) {
-        for(Person person : persons){
-            List<RoleSchool> roles = (ArrayList<RoleSchool>)person.getRoles();
-            for(RoleSchool role : roles){
-                if(role.getRoleName().equalsIgnoreCase(roleName)){
-                    
-                }
+    public Course deleteCourse(long courseId) {
+        for(int i = 0; i < courses.size(); i++){
+            if(courses.get(i).getId() == courseId){
+                return courses.remove(i);
             }
         }
         return null;
     }
 
     @Override
-    public Person assignCourseToRoleSchool(String json, long personId, String roleName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Course assignRoleSchoolToCourse(long personId, long roleId, long courseId) {
+        RoleSchool specificRole = null;
+        for(Person person : persons){
+            if(person.getId() == personId){
+                List<RoleSchool> roles = (ArrayList<RoleSchool>)person.getRoles();
+                for(RoleSchool role : roles){
+                    if(role.getId() == roleId){
+                        specificRole = role;
+                    }
+                }
+            }
+        }
+        for(Course course : courses){
+            if(course.getId() == courseId){
+                course.addRole(specificRole);
+                return course;
+            }
+        }
+        return null;
     }
 
     @Override
-    public Person removeCourseFromRoleSchool(long personId, String roleName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Course unassignRoleSchoolFromCourse(long personId, long roleId, long courseId) {
+//        for(Person person : persons){
+//            List<RoleSchool> roles = (ArrayList<RoleSchool>)person.getRoles();
+//            for(RoleSchool role : roles){
+//                if(role.getId() == roleId){
+//                    for(Course course : courses){
+//                        for(RoleSchool coursesRole : course.getRoles()){
+//                            course.removeRole(roleId);
+//                            return person;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return null;
+        for(Course course : courses){
+            if(course.getId() == courseId){
+                course.removeRole(roleId);
+                return course;
+            }
+        }
+        return null;
     }
+
+    
+    
+    
 
 }

@@ -15,9 +15,9 @@ public interface CourseFacadeInterface {
     
     public Course addCourseFromGson(String json);
     
-    public Course deleteCourse(long personId, String roleName);
+    public Course deleteCourse(long courseId);
     
-    public Person assignCourseToRoleSchool(String json, long personId, String roleName);
+    public Course assignRoleSchoolToCourse(long personId, long roleId, long courseId);
     
-    public Person removeCourseFromRoleSchool(long personId, String roleName);
+    public Course unassignRoleSchoolFromCourse(long personId, long roleId, long courseId);
 }
