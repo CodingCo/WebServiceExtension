@@ -13,6 +13,7 @@ function bindEvents(){
         }
         showPerson(id);
     });
+    $("#rolesDropDown").bind("change", checkSemDeg);
     $("#btn_save").bind("click", updatePerson);
 
 }

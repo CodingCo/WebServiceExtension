@@ -99,6 +99,7 @@ function addRole(){
         }).done(function(role){
             if(role != null){
                 showAllPersons(index);
+                $("#semDeg").val("");
                 transactionStatus("succes");
             } else{
                 transactionStatus("fail");
@@ -120,6 +121,22 @@ function roleExists(roleName){
         }
     });
     return exists;
+}
+
+function checkSemDeg(){
+    var roleName = $("#rolesDropDown :selected").text();
+    if (roleName.toLowerCase() === "student") {
+        $("#semDegHeader").html("Semester");
+    }
+    if (roleName.toLowerCase() === "teacher") {
+        $("#semDegHeader").html("Degree");
+    }
+    if (roleName.toLowerCase() === "assistent teacher") {
+        $("#semDegHeader").html("No attribute");
+        $("#semDeg").prop("disabled", true);
+    } else{
+        $("#semDeg").prop("disabled", false);
+    }
 }
 
 function delRole(){
