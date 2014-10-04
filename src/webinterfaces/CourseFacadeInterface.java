@@ -8,13 +8,16 @@ import model.RoleSchool;
  * @author kasper
  */
 public interface CourseFacadeInterface {
-    public String getCourse(long id);
     
-    public String getAllCourses();
+    public String getAllCoursesAsJson();
     
-    public Course addCourse(String json);
+    public String getOneCourseAsJson(long id);
     
-    public Course deleteCourse(long id);
+    public Course addCourseFromGson(String json);
     
-    public RoleSchool addRoleSchoolToCourse(String json, long id);
+    public Course deleteCourse(long personId, String roleName);
+    
+    public RoleSchool assignCourseToRoleSchool(String json, long personId, String roleName);
+    
+    public RoleSchool removeCourseFromRoleSchool(long personId, String roleName);
 }
