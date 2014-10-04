@@ -7,7 +7,7 @@ import model.RoleSchool;
  *
  * @author kasper
  */
-public interface CourseInterface {
+public interface CourseFacadeInterface {
     public String getCourse(long id);
     
     public String getAllCourses();

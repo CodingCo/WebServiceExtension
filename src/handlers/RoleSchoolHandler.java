@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import model.Person;
 import model.RoleSchool;
-import webinterfaces.FacadeInterface;
+import webinterfaces.PersonFacadeInterface;
 
 /**
  *
@@ -20,10 +20,10 @@ import webinterfaces.FacadeInterface;
 public class RoleSchoolHandler implements HttpHandler{
 
     Gson trans;
-    FacadeInterface facade;
+    PersonFacadeInterface facade;
     ServerResponse sr;
     
-    public RoleSchoolHandler(Gson trans, FacadeInterface facade, ServerResponse sr){
+    public RoleSchoolHandler(Gson trans, PersonFacadeInterface facade, ServerResponse sr){
         this.trans = trans;
         this.facade = facade;
         this.sr = sr;

@@ -2,7 +2,7 @@ package facades;
 
 import model.Person;
 import model.RoleSchool;
-import webinterfaces.FacadeInterface;
+import webinterfaces.PersonFacadeInterface;
 import com.google.gson.Gson;
 import java.util.List;
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import model.Teacher;
  *
  * @author ThomasHedegaard
  */
-public class PersonFacade implements FacadeInterface {
+public class PersonFacade implements PersonFacadeInterface {
 
     private Gson trans;
     private EntityManager em;

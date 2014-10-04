@@ -7,7 +7,7 @@ import model.RoleSchool;
  *
  * @author simon
  */
-public interface FacadeInterface {
+public interface PersonFacadeInterface {
 
     public String getPersonsAsJSON();
 

@@ -8,13 +8,13 @@ import model.Person;
 import model.RoleSchool;
 import model.Student;
 import model.Teacher;
-import webinterfaces.FacadeInterface;
+import webinterfaces.PersonFacadeInterface;
 
 /**
  *
  * @author ThomasHedegaard
  */
-public class PersonFacadeMock implements FacadeInterface {
+public class PersonFacadeMock implements PersonFacadeInterface {
 
     private List<Person> persons;
     private Gson trans;

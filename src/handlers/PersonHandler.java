@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import model.Person;
 import model.RoleSchool;
-import webinterfaces.FacadeInterface;
+import webinterfaces.PersonFacadeInterface;
 
 /**
  *
@@ -20,13 +20,13 @@ import webinterfaces.FacadeInterface;
 public class PersonHandler implements HttpHandler {
 
     Gson trans;
-    FacadeInterface facade;
+    PersonFacadeInterface facade;
     ServerResponse sr;
     
     private String response;
     private int status;
 
-    public PersonHandler(Gson trans, FacadeInterface facade, ServerResponse sr) {
+    public PersonHandler(Gson trans, PersonFacadeInterface facade, ServerResponse sr) {
         this.trans = trans;
         this.facade = facade;
         this.sr = sr;

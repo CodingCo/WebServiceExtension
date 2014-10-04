@@ -17,7 +17,7 @@ import java.util.Properties;
 import model.RoleSchool;
 import serverinterfaces.IHandler;
 import utility.Utility;
-import webinterfaces.FacadeInterface;
+import webinterfaces.PersonFacadeInterface;
 
 /**
  *
@@ -31,7 +31,7 @@ public class WebServer {
     private final Properties property = Utility.initProperties("serverproperties.txt");
     private IHandler handler;
     
-    FacadeInterface facade;
+    PersonFacadeInterface facade;
     ServerResponse sr;
     GsonBuilder gsonBuilder;
     Gson trans;

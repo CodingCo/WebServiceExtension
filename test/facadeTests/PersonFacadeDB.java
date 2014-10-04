@@ -2,7 +2,7 @@ package facadeTests;
 
 import model.Person;
 import model.RoleSchool;
-import webinterfaces.FacadeInterface;
+import webinterfaces.PersonFacadeInterface;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
@@ -15,7 +15,7 @@ import model.Teacher;
  *
  * @author ThomasHedegaard
  */
-public class PersonFacadeDB implements FacadeInterface {
+public class PersonFacadeDB implements PersonFacadeInterface {
 
     Gson trans;
     EntityManager em;

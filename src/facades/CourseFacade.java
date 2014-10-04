@@ -9,13 +9,13 @@ import model.Course;
 import model.RoleSchool;
 import model.Student;
 import model.Teacher;
-import webinterfaces.CourseInterface;
+import webinterfaces.CourseFacadeInterface;
 
 /**
  *
  * @author kasper
  */
-public class CourseFacade implements CourseInterface {
+public class CourseFacade implements CourseFacadeInterface {
 
     Gson transaction;
     EntityManager em;

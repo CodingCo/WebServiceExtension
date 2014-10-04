@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import webinterfaces.FacadeInterface;
+import webinterfaces.PersonFacadeInterface;
 
 /**
  *
@@ -25,7 +25,7 @@ import webinterfaces.FacadeInterface;
  */
 public class PersonFacadeTest {
 
-    FacadeInterface instance;
+    PersonFacadeInterface instance;
     GsonBuilder gsonBuilder;
     Gson trans;
 
