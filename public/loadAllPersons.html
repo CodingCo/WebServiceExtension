@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="button" class="btn btn-primary" value="add person" id="btn_add"/>
+                    <input type="button" class="btn btn-primary" value="Add person" id="btn_add"/>
                     <button type="button" class="btn btn-primary" id="btn_save">Save Person</button>
                     <button type="button" class="btn btn-primary" id="btn_del">Delete Person</button>
                 </div>
@@ -104,12 +104,11 @@
             <div role="form">
 
                 <div class="form-group">
-                    <input class="form-control" id="semDeg" type="text"/>
+                    <input class="form-control" id="semDeg" type="text" placeholder="student/teacher"/>
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-primary" id="btn_addRole">Add Role</button>
-                    <button type="button" class="btn btn-primary" id="btn_deleteRole">Delete Role
-                    </button>
+                    <button type="button" class="btn btn-primary" id="btn_deleteRole">Delete Role</button>
                 </div>
             </div>
         </div>
@@ -121,6 +120,23 @@
 
             <div class="form-group">
                 <select class="form-control" id="courses" size="2" style="min-width: 150px; height: 200px;"></select>
+            </div>
+
+
+            <div role="form">
+
+                <div class="form-group">
+                    <input class="form-control" id="courseName" type="text" placeholder="Course name"/>
+                </div>
+                <div class="form-group">
+                    <h4>Description</h4>
+                    <textarea class="form-control" id="courseDesc" maxlength="150" placeholder="max 150 characters" style="height: 103px;">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" id="btn_assignCourse">Add Course</button>
+                    <button type="button" class="btn btn-primary" id="btn_deleteCourse">Delete Course</button>
+                </div>
             </div>
         </div>
     </div>
