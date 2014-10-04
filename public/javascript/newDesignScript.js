@@ -28,13 +28,12 @@ function showRole(person){
     roles.forEach(function(role){
 
         if(role.roleName === "Student") {
-            options += "<option id = " + role.roleName + ">" + role.roleName + ", Semester: " + role.semester + "</option>";
+            options += "<option id = " + role.id + " value = " + role.roleName + ">" + role.roleName + ", Semester: " + role.semester + "</option>";
         }else if(role.roleName === "Teacher") {
-            options += "<option id = " + role.roleName + ">" + role.roleName + ", Degree: " + role.degree + "</option>";
+            options += "<option id = " + role.id + " value = " + role.roleName + ">" + role.roleName + ", Degree: " + role.degree + "</option>";
         }else {
-            options += "<option id = " + role.roleName + ">" + role.roleName + "</option>";
+            options += "<option id = " + role.id + " value = " + role.roleName + ">" + role.roleName + "</option>";
         }
-
     });
 
     $("#roles").html(options);
@@ -140,7 +139,7 @@ function checkSemDeg(){
 
 function delRole(){
     var personId = $("#persons :selected").attr("id");
-    var roleName = $("#roles :selected").attr("id");
+    var roleName = $("#roles :selected").attr("value");
 
     $.ajax({
         url: "http://localhost:8028/roleschool/"+personId,
@@ -194,7 +193,7 @@ function showAllPersons (index){
 }
 
 function checkAssignButton(){
-    var roleName = $("#roles :selected").attr("id");
+    var roleName = $("#roles :selected").attr("value");
     if (roleName.toLowerCase() === "student") {
         $("#btn_assignCourse").html("Enroll");
     }
