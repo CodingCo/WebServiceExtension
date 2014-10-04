@@ -75,8 +75,10 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Course[ id=" + id + " ]";
+        return "Course{" + "id=" + id + ", name=" + name + ", description=" + description + ", timeBlock=" + timeBlock + ", roles=" + roles + '}';
     }
+
+    
 
     // adders removers
     public void addRole(RoleSchool rs){

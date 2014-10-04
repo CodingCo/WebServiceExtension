@@ -83,7 +83,7 @@ public class PersonFacadeDB implements PersonFacadeInterface {
     private EntityManager createEntityManager() {
         // testDbPU
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDbPU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ServerSidePU");
             EntityManager emToReturn = emf.createEntityManager();
             return emToReturn;
         } catch (PersistenceException e) {
