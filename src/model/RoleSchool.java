@@ -24,6 +24,7 @@ public abstract class RoleSchool implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roleIdGen")
     @SequenceGenerator(name = "roleIdGen", sequenceName = "ROLE_GEN", initialValue = 100000, allocationSize = 1)
+    @Expose
     private Long id;
 
     @Expose

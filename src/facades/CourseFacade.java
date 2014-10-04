@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.AssistentTeacher;
 import model.Course;
+import model.Person;
 import model.RoleSchool;
 import model.Student;
 import model.Teacher;
@@ -48,14 +49,16 @@ public class CourseFacade implements CourseFacadeInterface {
     }
 
     @Override
-    public RoleSchool assignCourseToRoleSchool(String json, long personId, String roleName) {
+    public Person assignCourseToRoleSchool(String json, long personId, String roleName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public RoleSchool removeCourseFromRoleSchool(long personId, String roleName) {
+    public Person removeCourseFromRoleSchool(long personId, String roleName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
 
 }

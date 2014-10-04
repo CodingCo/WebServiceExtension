@@ -14,6 +14,7 @@ function bindEvents(){
         showPerson(id);
     });
     $("#rolesDropDown").bind("change", checkSemDeg);
+    $("#roles").bind("click", checkAssignButton);
     $("#btn_save").bind("click", updatePerson);
 
 }

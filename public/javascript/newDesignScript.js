@@ -113,7 +113,6 @@ function addRole(){
 
 function roleExists(roleName){
     var exists = false;
-
     $("#roles > option").each(function(){
         if(this.text.indexOf(roleName) > -1){
             transactionStatus("roleExists");
@@ -192,6 +191,19 @@ function showAllPersons (index){
         showPerson(personId);
     });
 
+}
+
+function checkAssignButton(){
+    var roleName = $("#roles :selected").attr("id");
+    if (roleName.toLowerCase() === "student") {
+        $("#btn_assignCourse").html("Enroll");
+    }
+    if (roleName.toLowerCase() === "teacher") {
+        $("#btn_assignCourse").html("Teach");
+    }
+    if (roleName.toLowerCase() === "assistentteacher") {
+        $("#btn_assignCourse").html("Assist");
+    }
 }
 
 function clearFields(){

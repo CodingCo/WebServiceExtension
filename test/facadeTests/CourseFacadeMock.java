@@ -14,11 +14,13 @@ import webinterfaces.CourseFacadeInterface;
  */
 public class CourseFacadeMock implements CourseFacadeInterface {
 
-    private List<Person> courses;
+    private List<Course> courses;                               // two tables, because we have two independent tables
+    private List<Person> persons;
     private Gson trans;
 
     public CourseFacadeMock(Gson trans) {
         this.courses = new ArrayList<>();
+        this.persons = new ArrayList<>();
         this.trans = trans;
     }
 
@@ -29,17 +31,33 @@ public class CourseFacadeMock implements CourseFacadeInterface {
 
     @Override
     public String getOneCourseAsJson(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(Course course : courses){
+            if(course.getId() == id){
+                return trans.toJson(course);
+            }
+        }
+        return null;
     }
 
     @Override
     public Course addCourseFromGson(String json) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Course courseFromJson = trans.fromJson(json, Course.class); 
+        courseFromJson.setId(99999l + (courses.size()+1));
+        courses.add(courseFromJson);
+        return courseFromJson;
     }
 
     @Override
     public Course deleteCourse(long personId, String roleName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(Person person : persons){
+            List<RoleSchool> roles = (ArrayList<RoleSchool>)person.getRoles();
+            for(RoleSchool role : roles){
+                if(role.getRoleName().equalsIgnoreCase(roleName)){
+                    
+                }
+            }
+        }
+        return null;
     }
 
     @Override
