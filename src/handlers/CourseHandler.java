@@ -37,7 +37,6 @@ public class CourseHandler implements HttpHandler {
         String method = he.getRequestMethod().toUpperCase();
         response = "";
         status = 0;
-        System.out.println("Method: " + method);
         switch (method) {
             case "GET":
                 getRequest(he);
@@ -125,7 +124,6 @@ public class CourseHandler implements HttpHandler {
             BufferedReader br = new BufferedReader(isr);
             String jsonInput = br.readLine();
             long roleId = parseRoleId(jsonInput);
-            System.out.println("roleId: " + roleId);
             String path = he.getRequestURI().getPath();
             int lastIndex = path.lastIndexOf("/");
 
@@ -149,15 +147,11 @@ public class CourseHandler implements HttpHandler {
         }
     }
 
-    private static long parseRoleId(String json){
+    private long parseRoleId(String json){
         String jsonSub = json.substring(1, json.length()-1);
         String stringRoleId = jsonSub.split(",")[1].split(":")[1].trim();
         long roleId = Long.parseLong(stringRoleId); // stringRoleId.substring(1, stringRoleId.length()-1) if "100000"
         return roleId;
-    }
-    
-    public static void main(String[] args) {
-        System.out.println(parseRoleId("{ type: assign, roleId: 100000 }"));
     }
     
     
