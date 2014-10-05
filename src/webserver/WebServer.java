@@ -16,6 +16,7 @@ import handlers.ServerResponse;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.Properties;
+import model.Course;
 import model.RoleSchool;
 import serverinterfaces.IHandler;
 import utility.Utility;

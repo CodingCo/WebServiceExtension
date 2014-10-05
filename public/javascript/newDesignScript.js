@@ -4,6 +4,7 @@
 
 $(document).ready(function(){
     showAllPersons();
+    showAllCourses();
     getAcademies();
     bindEvents();
 });
@@ -204,6 +205,71 @@ function checkAssignButton(){
         $("#btn_assignCourse").html("Assist");
     }
 }
+
+//== COURSE PART START ==//
+
+function showAllCourses(){
+    $.ajax({
+        url:"http://localhost:8028/course",
+        type: "GET",
+        dataType: 'json'
+    }).done(function(courses){
+        var options = "";
+        courses.forEach(function(course){
+                options += "<option id = " + course.id + ">" + course.name + "</option>";
+        });
+        $("#courses").html(options);
+    });
+}
+
+function createCourse(){
+    // ESCAPE SEQUENCE \" IMPORTANT TO A STRING WITH WHITESPACES
+    // ESCAPE SEQUENCE \n IS REPLACED WITH A WHITESPACE INSTEAD, BECAUSE JPA CAN'T ADD LINEBREAKS IF THE USER HITS "ENTER" IN DESC.
+    var data = "{ name: " + $("#courseName").val() + ", description: " + "\"" + $("#courseDesc").val().split("\n").join(" ") + "\"" + "}";
+    $.ajax({
+        url: "http://localhost:8028/course",
+        type: "POST",
+        data: data
+    }).done(function(course){
+        if(course != null){
+            showAllCourses();
+            $("#courseName").val("");
+            $("#courseDesc").val("");
+            transactionStatus("succes");
+        }else{
+            transactionStatus("fail");
+        }
+    });
+}
+
+function deleteCourse(){
+    var id = $("#courses :selected").attr("id");
+    $.ajax({
+        url: "http://localhost:8028/course/"+ id,
+        type: "DELETE",
+        dataType: "json"
+    }).done(function(course){
+        if(course != null){
+            showAllCourses();
+            $("#courseName").val("");
+            $("#courseDesc").val("");
+            transactionStatus("succes");
+        }else{
+            transactionStatus("fail");
+        }
+    });
+}
+
+function showCourse(id){
+    $.get("http://localhost:8028/course/"+id, function(course){
+        $("#courseName").val(course.name);
+        $("#courseDesc").val(course.description);
+    });
+}
+
+
+
+//== COURSE PART START ==//
 
 function clearFields(){
     $("#fName").val("");

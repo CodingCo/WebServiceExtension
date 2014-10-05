@@ -82,7 +82,6 @@ public class CourseHandler implements HttpHandler {
             InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
             String jsonInput = br.readLine();
-
             Course c = facade.addCourseFromGson(jsonInput);
             response = trans.toJson(c);
 

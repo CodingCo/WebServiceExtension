@@ -17,4 +17,14 @@ function bindEvents(){
     $("#roles").bind("click", checkAssignButton);
     $("#btn_save").bind("click", updatePerson);
 
+    $("#btn_createCourse").bind("click", createCourse);
+    $("#btn_deleteCourse").bind("click", deleteCourse);
+    $("#courses").bind("click", function(e) {
+        var id = e.target.id;
+        if(isNaN(id)){
+            return;
+        }
+        showCourse(id);
+    });
+    
 }
