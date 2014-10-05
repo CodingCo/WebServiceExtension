@@ -17,7 +17,7 @@ public interface CourseFacadeInterface {
     
     public Course deleteCourse(long courseId);
     
-    public Course assignRoleSchoolToCourse(long personId, long roleId, long courseId);
+    public Course assignRoleSchoolToCourse(long roleId, long courseId);
     
-    public Course unassignRoleSchoolFromCourse(long personId, long roleId, long courseId);
+    public Course unassignRoleSchoolFromCourse(long roleId, long courseId);
 }

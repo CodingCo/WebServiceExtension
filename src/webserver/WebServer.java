@@ -5,8 +5,10 @@ import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpServer;
 import facades.PersonFacade;
 import adapters.RoleSchoolAdapter;
+import facades.CourseFacade;
 import handlers.AcademyHandler;
 import handlers.AdminHandler;
+import handlers.CourseHandler;
 import handlers.PersonHandler;
 import handlers.RoleSchoolHandler;
 import handlers.ServerFileHandler;
@@ -17,6 +19,7 @@ import java.util.Properties;
 import model.RoleSchool;
 import serverinterfaces.IHandler;
 import utility.Utility;
+import webinterfaces.CourseFacadeInterface;
 import webinterfaces.PersonFacadeInterface;
 
 /**
@@ -31,7 +34,9 @@ public class WebServer {
     private final Properties property = Utility.initProperties("serverproperties.txt");
     private IHandler handler;
     
-    PersonFacadeInterface facade;
+    PersonFacadeInterface personFacade;
+    CourseFacadeInterface courseFacade;
+    
     ServerResponse sr;
     GsonBuilder gsonBuilder;
     Gson trans;
@@ -43,7 +48,8 @@ public class WebServer {
         gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(RoleSchool.class, new RoleSchoolAdapter());
         trans = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
-        facade = new PersonFacade(trans);
+        personFacade = new PersonFacade(trans);
+        courseFacade = new CourseFacade(trans);
     }
 
     public void startServer() throws IOException {
@@ -52,9 +58,10 @@ public class WebServer {
         server = HttpServer.create(new InetSocketAddress(ip, port), 0);
         server.createContext("/", new ServerFileHandler());
         server.createContext("/log", new AdminHandler(handler));
-        server.createContext("/person", new PersonHandler(trans, facade, sr));
+        server.createContext("/course", new CourseHandler(trans, courseFacade, sr));
+        server.createContext("/person", new PersonHandler(trans, personFacade, sr));
         server.createContext("/academy", new AcademyHandler());
-        server.createContext("/roleschool", new RoleSchoolHandler(trans, facade, sr));
+        server.createContext("/roleschool", new RoleSchoolHandler(trans, personFacade, sr));
         server.setExecutor(null);
         server.start();
         System.out.println("Server started, listening on port: " + port);

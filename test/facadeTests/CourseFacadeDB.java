@@ -60,7 +60,7 @@ public class CourseFacadeDB implements CourseFacadeInterface {
     }
 
     @Override
-    public Course assignRoleSchoolToCourse(long personId, long roleId, long courseId) {
+    public Course assignRoleSchoolToCourse(long roleId, long courseId) {
         em.getTransaction().begin();
         RoleSchool roleSchool = em.find(RoleSchool.class, roleId);
         Course targetCourse = em.find(Course.class, courseId);
@@ -70,9 +70,10 @@ public class CourseFacadeDB implements CourseFacadeInterface {
     }
 
     @Override
-    public Course unassignRoleSchoolFromCourse(long personId, long roleId, long courseId) {
+    public Course unassignRoleSchoolFromCourse(long roleId, long courseId) {
         em.getTransaction().begin();
         Course targetCourse = em.find(Course.class, courseId);
+        targetCourse.removeRole(roleId);
         em.getTransaction().commit();
         return targetCourse;
     }
@@ -109,11 +110,11 @@ public class CourseFacadeDB implements CourseFacadeInterface {
         courseFacade.addCourseFromGson(trans.toJson(courseToAdd2));
 //        courseFacade.deleteCourse(100000);
         
-        courseFacade.assignRoleSchoolToCourse(0, 100000, 100002);
-        courseFacade.assignRoleSchoolToCourse(0, 100000, 100003);
-        courseFacade.assignRoleSchoolToCourse(0, 100001, 100002);
-        courseFacade.assignRoleSchoolToCourse(0, 100001, 100003);
-        System.err.println(courseFacade.unassignRoleSchoolFromCourse(0, 100000, 100002).toString());
+        courseFacade.assignRoleSchoolToCourse(100000, 100002);
+        courseFacade.assignRoleSchoolToCourse(100000, 100003);
+        courseFacade.assignRoleSchoolToCourse(100001, 100002);
+        courseFacade.assignRoleSchoolToCourse(100001, 100003);
+        System.err.println(courseFacade.unassignRoleSchoolFromCourse(100000, 100002).toString());
         
         String coursesAsJson = courseFacade.getAllCoursesAsJson();
         System.out.println("getAllCoursesAsJson: " + coursesAsJson);

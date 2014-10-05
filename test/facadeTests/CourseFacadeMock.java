@@ -58,17 +58,16 @@ public class CourseFacadeMock implements CourseFacadeInterface {
     }
 
     @Override
-    public Course assignRoleSchoolToCourse(long personId, long roleId, long courseId) {
+    public Course assignRoleSchoolToCourse(long roleId, long courseId) {
         RoleSchool specificRole = null;
         for(Person person : persons){
-            if(person.getId() == personId){
                 List<RoleSchool> roles = (ArrayList<RoleSchool>)person.getRoles();
                 for(RoleSchool role : roles){
                     if(role.getId() == roleId){
                         specificRole = role;
                     }
                 }
-            }
+            
         }
         for(Course course : courses){
             if(course.getId() == courseId){
@@ -80,7 +79,7 @@ public class CourseFacadeMock implements CourseFacadeInterface {
     }
 
     @Override
-    public Course unassignRoleSchoolFromCourse(long personId, long roleId, long courseId) {
+    public Course unassignRoleSchoolFromCourse(long roleId, long courseId) {
 //        for(Person person : persons){
 //            List<RoleSchool> roles = (ArrayList<RoleSchool>)person.getRoles();
 //            for(RoleSchool role : roles){
