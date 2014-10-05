@@ -14,7 +14,10 @@ function bindEvents(){
         showPerson(id);
     });
     $("#rolesDropDown").bind("change", checkSemDeg);
-    $("#roles").bind("click", checkAssignButton);
+    $("#roles").bind("click", function(){
+        checkAssignButton();
+        showCoursesAssignedToRole();
+    });
     $("#btn_save").bind("click", updatePerson);
 
     $("#btn_createCourse").bind("click", createCourse);
@@ -26,5 +29,5 @@ function bindEvents(){
         }
         showCourse(id);
     });
-    
+    $("#btn_assignCourse").bind("click", assignCourse);
 }

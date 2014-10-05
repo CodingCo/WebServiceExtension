@@ -267,7 +267,80 @@ function showCourse(id){
     });
 }
 
+function assignCourse(){
+    var roleId = $("#roles :selected").attr("id");
+    var courseId = $("#courses :selected").attr("id");
+    //alert("assign role with id " + roleId + " to course with id " + courseId + "?");
+    //alert("data is: " + "{ type: assign, roleId: " + roleId + " }")
+    $.ajax({
+        url: "http://localhost:8028/course/"+ courseId,
+        type: "PUT",
+        dataType: "json",
+        data: "{ type: assign, roleId: " + roleId + " }"
+    }).done(function(course){
+        if(course != null){
+            transactionStatus("succes");
+            showCoursesAssignedToRole();
+        }else{
+            transactionStatus("fail");
+        }
+    });
+}
 
+function showCoursesAssignedToRole(){
+    resetColorOnCourses();
+
+    var roleId = $("#roles :selected").attr("id");
+    var courseIds = [];
+    $.ajax({
+        url:"http://localhost:8028/course",
+        type: "GET",
+        dataType: 'json'
+    }).done(function(courses){
+        courses.forEach(function(course){
+            var roles = course.roles;
+            //alert("current course: " + course.id);
+            roles.forEach(function(role){
+                //alert("current role " + role.id);
+                if(roleId == role.id){
+                    //alert("match on selectedRoleId: " + roleId + " and currentRoleId: " + role.id + " in courseId: " + course.id);
+                    courseIds.push(course.id);
+                }
+            });
+        });
+
+        colorTheCourses(courseIds);
+        deselectAllCourses();
+    });
+}
+
+function colorTheCourses(courseIds){
+    //alert("going to iterate through: " + courseIds);
+    //== Color the matches
+    courseIds.forEach(function(courseId){
+        $("#courses > option").each(function(){
+            if(this.id == courseId){
+                //alert("theres a match on this.id: " + this.id + " and courseId: " + courseId + " this SHOULD be colorized!");
+                $(this).css("background-color", "LIGHTSKYBLUE"); // LIGHTSKYBLUE or LIGHTGREEN
+            }
+        });
+    });
+}
+
+function deselectAllCourses(){
+    var currentCourseIndex = 0;
+
+    $("#courses > option").each(function(){
+        $("#courses option")[currentCourseIndex].selected = false;
+        currentCourseIndex++;
+    });
+}
+
+function resetColorOnCourses(){
+    $("#courses > option").each(function(){
+        $(this).css("background-color", "WHITE");
+    });
+}
 
 //== COURSE PART START ==//
 
