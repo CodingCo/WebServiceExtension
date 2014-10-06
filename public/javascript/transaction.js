@@ -23,14 +23,21 @@ function transactionStatus(type) {
 
 
 function getAcademies() {
+
     $.get("http://localhost:8028/academy", function (json) {
         var academies = json;
         var stringToAdd = "";
-        console.log(academies);
         for (var i = 0; i < json.length; i++) {
             stringToAdd += "<option id =" + json[i].name + ">" + json[i].name + "</option>";
         }
-        $("#academy").html(stringToAdd)
+        $("#academy").html(stringToAdd);
+        var elem = $("#academy_info_bar");
+        elem.addClass("list-group-item-success");
+        elem.html("All Academies loaded");
+    }).fail(function(){
+        var elem = $("#academy_info_bar");
+        elem.addClass("list-group-item-danger");
+        elem.html("Get academies failed");
     });
 }
 

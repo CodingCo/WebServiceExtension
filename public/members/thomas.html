@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
 
     <!-- G5 MEMEBER NAME-->
-    <title>Christophers page</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
+    <title>Thomases page</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
 
-    <script type="text/javascript" src="javascript/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../javascript/jquery.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
 
 </head>
 <body>
@@ -26,9 +26,9 @@
     <div class="jumbotron">
 
         <!-- G5 MEMEBER NAME-->
-        <h1>Christopher Mortensen</h1>
+        <h1>Thomas Hedegaard</h1>
 
-        <p>aka. REST Rambo</p>
+        <p>aka. Singleton Samurai</p>
     </div>
 
     <div class="row">
@@ -39,11 +39,13 @@
                 <div class="caption">
                     <h3>KA 1</h3>
 
-                    <p> Worked on the chat client, along with Thomas. Primarily focused his work on creating the Gui,
-                        and implementing the functionality.</p>
+                    <p> Primary work was designing the client logic, along with the swing components. Worked with
+                        Christopher on the Gui.
+                        Also helped with designing the architecture of the server, to make it testable and SOLID
+                        safe.</p>
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-success">chatclient</li>
-                        <li class="list-group-item list-group-item-success">swing</li>
+                        <li class="list-group-item list-group-item-success">chatserver</li>
                     </ul>
                     <div class="well-sm">commits on github: #</div>
                 </div>
@@ -56,20 +58,21 @@
                 <div class="caption">
                     <h3>KA 2</h3>
 
-                    <p>
-                        Primary work was with Thomas on the Facade classes. Christopher tested the Facade Class up against a 						MockDatabase and a “real database.
-                        Christopher wrote the Adapter Class that serializes/deserializes the RoleSchool entity, with
-                        Thomas. Christopher wrote the documentation on Testing.
-						Furthermore Chrsitopher did a lot of debugging in the extension program. 
-						On the Client side he wrote some javascript with Robert, handling the ajax calls to our webservice. 
+                    <p> 
+						Christopher and Thomas used TDD on PersonFacade: made the FacadeTest, FacadeMock and FacadeDB.
+                        They also made the real PersonFacade, when all tests were complete. 
+						he refactored entities aswell, and made a major architecture rededign with the Factory class.
+                        Thomas wrote the Adapter Class that serializes/deserializes the RoleSchool entity, with
+                        Christopher. 
+						He also wrote the documentation on inheritance strategy and the design and architure.
                     </p>
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-success">JPA</li>
                         <li class="list-group-item list-group-item-success">Test</li>
-						<li class="list-group-item list-group-item-success">REST</li>
-						<li class="list-group-item list-group-item-success">Javascript</li>
+						<li class="list-group-item list-group-item-success">Debugging/Refacturing</li>
+						<li class="list-group-item list-group-item-success">Deployment</li>
                     </ul>
-                    <div class="well-sm">commits on github: 18</div>
+                    <div class="well-sm">commits on github: 19</div>
                 </div>
             </div>
         </div>

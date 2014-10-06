@@ -30,4 +30,5 @@ function bindEvents(){
         showCourse(id);
     });
     $("#btn_assignCourse").bind("click", assignCourse);
+    $("#get_academies").bind("click",getAcademies);
 }
