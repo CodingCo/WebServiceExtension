@@ -321,7 +321,7 @@ function colorTheCourses(courseIds){
         $("#courses > option").each(function(){
             if(this.id == courseId){
                 //alert("theres a match on this.id: " + this.id + " and courseId: " + courseId + " this SHOULD be colorized!");
-                $(this).css("background-color", "LIGHTSKYBLUE"); // LIGHTSKYBLUE or LIGHTGREEN
+                $(this).css("background-color", "LIGHTGREEN"); // LIGHTSKYBLUE or LIGHTGREEN
             }
         });
     });
