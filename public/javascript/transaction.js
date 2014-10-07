@@ -2,6 +2,7 @@
  * Created by simon on 03/10/14.
  */
 
+var ipAdress = "localhost";
 
 function transactionStatus(type) {
     var succesMessage = '<div class="alert alert-success" role="alert">The transaction was a succes</div>';
@@ -24,7 +25,7 @@ function transactionStatus(type) {
 
 function getAcademies() {
 
-    $.get("http://localhost:8028/academy", function (json) {
+    $.get("http://"+ipAdress+":8028/academy", function (json) {
         var academies = json;
         var stringToAdd = "";
         for (var i = 0; i < json.length; i++) {
@@ -44,7 +45,7 @@ function getAcademies() {
 
 
 function getOnlineUsers(){
-    $.get("http://localhost:8028/log/online", function(json){
+    $.get("http://"+ipAdress+":8028/log/online", function(json){
         var isJson =  IsJsonString(json);
 		if(isJson){
 			var users = JSON.parse(json);
@@ -71,7 +72,7 @@ function IsJsonString(str) {
 }
 
 function getLogMessages(){
-    $.get("http://localhost:8028/log/log", function(text){
+    $.get("http://"+ipAdress+":8028/log/log", function(text){
         $("#logmessages").html(text);
 
     });

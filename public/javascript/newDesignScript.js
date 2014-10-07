@@ -2,6 +2,9 @@
  * Created by Robert and Christopher on 02-10-2014.
  */
 
+ //Change only this one when deploying
+ var ipAdress = "localhost";
+
 $(document).ready(function(){
     showAllPersons();
     showAllCourses();
@@ -12,7 +15,7 @@ $(document).ready(function(){
 var index;
 
 function showPerson (id){
-    $.get("http://localhost:8028/person/"+id, function(person){
+    $.get("http://"+ipAdress+":8028/person/"+id, function(person){
         $("#fName").val(person.firstName);
         $("#lName").val(person.lastName);
         $("#mail").val(person.mail);
@@ -45,7 +48,7 @@ function addPerson(){
     var data = "{ firstName: " + $("#fName").val() + ", lastName: " + $("#lName").val() +
         ", mail: " + $("#mail").val() + ", phone: " + $("#phone").val()+ "}";
     $.ajax({
-        url: "http://localhost:8028/person",
+        url: "http://"+ipAdress+":8028/person",
         type: "POST",
         data: data
     }).done(function(user){
@@ -62,7 +65,7 @@ function addPerson(){
 function deletePerson(){
     var id = $("#persons :selected").attr("id");
     $.ajax({
-        url: "http://localhost:8028/person/"+ id,
+        url: "http://"+ipAdress+":8028/person/"+ id,
         type: "DELETE",
         dataType: "json",
         data: "{ data: person }"
@@ -92,7 +95,7 @@ function addRole(){
 
     if(!roleExists(roleName)){
         $.ajax({
-            url: "http://localhost:8028/roleschool/"+ personId,
+            url: "http://"+ipAdress+":8028/roleschool/"+ personId,
             type: "PUT",
             dataType: "json",
             data: data
@@ -143,7 +146,7 @@ function delRole(){
     var roleName = $("#roles :selected").attr("value");
 
     $.ajax({
-        url: "http://localhost:8028/roleschool/"+personId,
+        url: "http://"+ipAdress+":8028/roleschool/"+personId,
         type: "DELETE",
         dataType: "json",
         data: "{roleName: "+roleName+"}"
@@ -157,7 +160,7 @@ function updatePerson(){
     var data = "{ firstName: " + $("#fName").val() + ", lastName: " + $("#lName").val() +
         ", mail: " + $("#mail").val() + ", phone: " + $("#phone").val()+ "}";
     $.ajax({
-        url: "http://localhost:8028/person/"+ personId,
+        url: "http://"+ipAdress+":8028/person/"+ personId,
         type: "PUT",
         dataType: "json",
         data: data
@@ -168,7 +171,7 @@ function showAllPersons (index){
     index = $("#persons")[0].selectedIndex;
 
     $.ajax({
-        url:"http://localhost:8028/person",
+        url:"http://"+ipAdress+":8028/person",
         type: "GET",
         dataType: 'json'
 
@@ -210,7 +213,7 @@ function checkAssignButton(){
 
 function showAllCourses(){
     $.ajax({
-        url:"http://localhost:8028/course",
+        url:"http://"+ipAdress+":8028/course",
         type: "GET",
         dataType: 'json'
     }).done(function(courses){
@@ -227,7 +230,7 @@ function createCourse(){
     // ESCAPE SEQUENCE \n IS REPLACED WITH A WHITESPACE INSTEAD, BECAUSE JPA CAN'T ADD LINEBREAKS IF THE USER HITS "ENTER" IN DESC.
     var data = "{ name: " + $("#courseName").val() + ", description: " + "\"" + $("#courseDesc").val().split("\n").join(" ") + "\"" + "}";
     $.ajax({
-        url: "http://localhost:8028/course",
+        url: "http://"+ipAdress+":8028/course",
         type: "POST",
         data: data
     }).done(function(course){
@@ -245,7 +248,7 @@ function createCourse(){
 function deleteCourse(){
     var id = $("#courses :selected").attr("id");
     $.ajax({
-        url: "http://localhost:8028/course/"+ id,
+        url: "http://"+ipAdress+":8028/course/"+ id,
         type: "DELETE",
         dataType: "json"
     }).done(function(course){
@@ -261,7 +264,7 @@ function deleteCourse(){
 }
 
 function showCourse(id){
-    $.get("http://localhost:8028/course/"+id, function(course){
+    $.get("http://"+ipAdress+":8028/course/"+id, function(course){
         $("#courseName").val(course.name);
         $("#courseDesc").val(course.description);
     });
@@ -273,7 +276,7 @@ function assignCourse(){
     //alert("assign role with id " + roleId + " to course with id " + courseId + "?");
     //alert("data is: " + "{ type: assign, roleId: " + roleId + " }")
     $.ajax({
-        url: "http://localhost:8028/course/"+ courseId,
+        url: "http://"+ipAdress+":8028/course/"+ courseId,
         type: "PUT",
         dataType: "json",
         data: "{ type: assign, roleId: " + roleId + " }"
@@ -293,7 +296,7 @@ function showCoursesAssignedToRole(){
     var roleId = $("#roles :selected").attr("id");
     var courseIds = [];
     $.ajax({
-        url:"http://localhost:8028/course",
+        url:"http://"+ipAdress+":8028/course",
         type: "GET",
         dataType: 'json'
     }).done(function(courses){
